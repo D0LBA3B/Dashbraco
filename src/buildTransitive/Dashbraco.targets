@@ -1,0 +1,21 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <DashbracoContentFilesPath>$(MSBuildThisFileDirectory)..\App_Plugins\Dashbraco\**\*.*</DashbracoContentFilesPath>
+  </PropertyGroup>
+
+  <Target Name="CopyDashbracoAssets" BeforeTargets="BeforeBuild">
+    <ItemGroup>
+      <DashbracoContentFiles Include="$(DashbracoContentFilesPath)" />
+    </ItemGroup>
+    <Message Text="Copying Dashbraco files: $(DashbracoContentFilesPath) - #@(DashbracoContentFiles->Count()) files" Importance="high" />
+    <Copy SourceFiles="@(DashbracoContentFiles)" DestinationFiles="@(DashbracoContentFiles->'$(MSBuildProjectDirectory)\App_Plugins\Dashbraco\%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
+  </Target>
+
+  <Target Name="ClearDashbracoAssets" BeforeTargets="Clean">
+    <ItemGroup>
+      <DashbracoDir Include="$(MSBuildProjectDirectory)\App_Plugins\Dashbraco\" />
+    </ItemGroup>
+    <Message Text="Clear old Dashbraco data" Importance="high" />
+    <RemoveDir Directories="@(DashbracoDir)" />
+  </Target>
+</Project>
