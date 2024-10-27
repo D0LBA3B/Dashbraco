@@ -1,5 +1,17 @@
 {
-    "id": "Dashbraco",
-    "name": "Dashbraco",
-    "allowPackageTelemetry": true
+  "id": "Dashbraco",
+  "name": "Dashbraco",
+  "allowPackageTelemetry": true,
+  "javascript": [
+    "~/App_Plugins/Dashbraco/dashbraco.config.js",
+    "~/App_Plugins/Dashbraco/controllers/dashbracoController.js"
+  ],
+  "dashboards": [
+    {
+      "alias": "dashbraco",
+      "view": "~/App_Plugins/Dashbraco/views/dashbraco.html",
+      "sections": [ "content" ],
+      "weight": 1
+    }
+  ]
 }

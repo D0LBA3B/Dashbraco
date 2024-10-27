@@ -8,13 +8,17 @@
 
   <PropertyGroup>
     <PackageId>Dashbraco</PackageId>
+    <Version>0.0.1</Version>
     <Product>Dashbraco</Product>
     <Title>Dashbraco</Title>
-    <Description>...</Description>
-    <PackageTags>umbraco plugin package</PackageTags>
+    <Description>Dashbraco is a modular dashboard package for Umbraco, designed to provide analytics and insights on site performance and user engagement directly within the CMS.</Description>
+    <PackageTags>umbraco plugin package analytics dashboard</PackageTags>
+    <Authors>D0LBA3B</Authors>
+    <Company>D0LBA3B</Company>
     <PackageProjectUrl>https://github.com/D0LBA3B/Dashbraco</PackageProjectUrl>
-    <Copyright>2024 - D0LBA3B</Copyright>
+    <Copyright>Copyright © D0LBA3B 2024</Copyright>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/D0LBA3B/Dashbraco</RepositoryUrl>
   </PropertyGroup>
   
   <ItemGroup>
@@ -25,6 +29,25 @@
   <ItemGroup>
     <Content Include="App_Plugins\Dashbraco\**" ExcludeFromSingleFile="true" CopyToPublishDirectory="Always" />
     <None Include="buildTransitive\**" Pack="true" PackagePath="buildTransitive" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\DashbracoController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="App_Plugins\Dashbraco\dashboardController.js" />
+    <None Remove="App_Plugins\Dashbraco\dashbraco.config.js" />
+    <None Remove="App_Plugins\Dashbraco\Dashbraco.html" />
+    <None Remove="App_Plugins\Dashbraco\views\pageViews.html" />
+    <None Remove="App_Plugins\Dashbraco\views\userEngagement.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Controllers\DashbracoController.cs">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

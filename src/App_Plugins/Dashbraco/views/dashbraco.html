@@ -1,0 +1,11 @@
+﻿<div ng-controller="dashbracoController">
+    <h1>Dashbraco Dashboard v1.0.0 test</h1>
+
+    <div ng-if="modules.includes('Page Views')">
+        <div ng-include="'/App_Plugins/Dashbraco/views/pageViews.html'"></div>
+    </div>
+
+    <div ng-if="modules.includes('User Engagement')">
+        <div ng-include="'/App_Plugins/Dashbraco/views/userEngagement.html'"></div>
+    </div>
+</div>
