@@ -1,0 +1,1 @@
+dotnet pack Our.Umbraco.Dashbraco/Our.Umbraco.Dashbraco.csproj --output Artifacts --configuration Release

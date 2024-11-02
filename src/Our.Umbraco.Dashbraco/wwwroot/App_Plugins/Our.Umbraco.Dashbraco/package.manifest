@@ -1,0 +1,9 @@
+﻿{
+  "javascript": [
+    "~/App_Plugins/Our.Umbraco.Dashbraco/Dashbraco.controller.js"
+  ],
+  "css": [
+    "~/App_Plugins/Our.Umbraco.Dashbraco/Dashbraco.css"
+  ]
+
+}

@@ -463,12 +463,12 @@ appsettings-schema.*.json
 umbraco-package-schema.json
 
 # Packages created from the backoffice (package.xml/package.zip)
-/umbraco/Data/CreatedPackages/
+/Our.Umbraco.Dashbraco.Test/umbraco/Data/CreatedPackages/
 
 # Temp folder containing Examine indexes, NuCache, MediaCache, etc.
-/umbraco/Data/TEMP/
+/Our.Umbraco.Dashbraco.Test/umbraco/Data/TEMP/
 
 # SQLite database files
-/umbraco/Data/*.sqlite.db
-/umbraco/Data/*.sqlite.db-shm
-/umbraco/Data/*.sqlite.db-wal
+/Our.Umbraco.Dashbraco.Test/umbraco/Data/*.sqlite.db
+/Our.Umbraco.Dashbraco.Test/umbraco/Data/*.sqlite.db-shm
+/Our.Umbraco.Dashbraco.Test/umbraco/Data/*.sqlite.db-wal
