@@ -1,3 +1,22 @@
 ﻿.dashbraco {
-    display: flex;
+    padding: 20px;
+    background-color: #f8f9fa;
 }
+
+    .dashbraco .dashboard-section {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+        .dashbraco .dashboard-section umb-box {
+            width: 100%;
+            max-width: 400px;
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+            .dashbraco .dashboard-section umb-box .dashboard-content {
+                padding: 10px;
+                font-size: 14px;
+            }

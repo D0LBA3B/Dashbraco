@@ -3,4 +3,12 @@
 	<area alias="dashboardTabs">
 		<key alias="Our.Umbraco.Dashbraco">Welcome</key>
 	</area>
+  <area alias="dashbraco">
+    <key alias="overviewTitle">Overview</key>
+    <key alias="overviewDescription">Real-time statistics</key>
+    <key alias="pagePerformanceTitle">Page Performance</key>
+    <key alias="pagePerformanceDescription">Loading time and user interactions</key>
+    <key alias="trafficSourcesTitle">Traffic Sources</key>
+    <key alias="trafficSourcesDescription">Visitor origins and interactions</key>
+  </area>
 </language>

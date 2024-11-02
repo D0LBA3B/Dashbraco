@@ -472,3 +472,6 @@ umbraco-package-schema.json
 /Our.Umbraco.Dashbraco.Test/umbraco/Data/*.sqlite.db
 /Our.Umbraco.Dashbraco.Test/umbraco/Data/*.sqlite.db-shm
 /Our.Umbraco.Dashbraco.Test/umbraco/Data/*.sqlite.db-wal
+
+#Test files
+/Our.Umbraco.Dashbraco.Test/App_Plugins/

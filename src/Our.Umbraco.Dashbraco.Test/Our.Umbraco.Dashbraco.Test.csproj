@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
     </PropertyGroup>
@@ -7,7 +7,6 @@
         <PackageReference Include="Umbraco.Cms" Version="13.0.0" />
     </ItemGroup>
 
-    <Import Project="..\Our.Umbraco.Dashbraco\build\Our.Umbraco.Dashbraco.targets" />
     <ItemGroup>
         <ProjectReference Include="..\Our.Umbraco.Dashbraco\Our.Umbraco.Dashbraco.csproj" />
     </ItemGroup>
@@ -49,4 +48,7 @@
         <RazorCompileOnBuild>false</RazorCompileOnBuild>
         <RazorCompileOnPublish>false</RazorCompileOnPublish>
     </PropertyGroup>
+  <Target Name="RunDashbracoBuildScript" AfterTargets="Build">
+    <Exec Command="powershell -ExecutionPolicy Bypass -File ../Our.Umbraco.Dashbraco/build.ps1" />
+  </Target>
 </Project>

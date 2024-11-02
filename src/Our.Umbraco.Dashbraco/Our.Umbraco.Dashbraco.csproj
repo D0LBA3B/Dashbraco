@@ -9,7 +9,7 @@
   <PropertyGroup>
     <PackageId>Our.Umbraco.Dashbraco</PackageId>
     <Version>0.0.1</Version>
-    <Product>Our.Umbraco.Dashbraco</Product>
+    <Product>Dashbraco - Dashboard for Umbraco</Product>
     <Title>Our.Umbraco.Dashbraco</Title>
     <Description>Dashbraco is a modular dashboard package for Umbraco, designed to provide analytics and insights on site performance and user engagement directly within the CMS.</Description>
     <PackageTags>umbraco plugin package analytics dashboard</PackageTags>
@@ -18,6 +18,8 @@
     <PackageProjectUrl>https://github.com/D0LBA3B/Dashbraco</PackageProjectUrl>
     <Copyright>Copyright © D0LBA3B 2024</Copyright>
     <RepositoryUrl>https://github.com/D0LBA3B/Dashbraco</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
@@ -25,9 +27,6 @@
     <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="13.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="build\**\*.*">
-      <Pack>True</Pack>
-      <PackagePath>buildTransitive</PackagePath>
-    </None>
+    <Compile Remove="build.ps1" />
   </ItemGroup>
 </Project>

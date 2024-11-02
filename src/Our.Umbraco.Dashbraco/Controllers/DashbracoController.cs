@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Our.Umbraco.Dashbraco.Models.Fronted;
 using Umbraco.Cms.Core.Cache;
 using Umbraco.Cms.Core.Security;
 using Umbraco.Cms.Core.Services;
@@ -37,15 +38,15 @@ namespace Our.Umbraco.Dashbraco.Controllers
         }
 
         [HttpGet]
-        public string GetAllRecentActivities()
+        public GAnalyticsModel GetAnalyticsData()
         {
-
-            return "model";
-        }
-
-        public string GetMyRecentActivities()
-        {
-            return "";
+            var data = new GAnalyticsModel
+            {
+                Visitors = "125",
+                PageViews = "512",
+                AvgSessionDuration = 225 
+            };
+            return data;
         }
     }
 }

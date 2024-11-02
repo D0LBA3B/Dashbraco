@@ -1,8 +1,24 @@
 ﻿<div ng-controller="Our.Umbraco.Dashbraco.Controller as vm" class="dashbraco">
-    <div>
-        TEST
+    <div class="dashboard-section">
         <umb-box>
-            <umb-box-header title-key="dashbraco_recentActivities" description-key="dashbraco_recentActivitiesDescription"></umb-box-header>
+            <umb-box-header title-key="dashbraco_overviewTitle" description-key="dashbraco_overviewDescription"></umb-box-header>
+            <div class="dashboard-content">
+                <p>Visitors: {{ vm.analyticsData.visitors }}</p>
+                <p>Page Views: {{ vm.analyticsData.pageViews }}</p>
+                <p>Average Session Duration: {{ vm.analyticsData.avgSessionDuration }}</p>
+            </div>
+        </umb-box>
+
+        <umb-box>
+            <umb-box-header title-key="dashbraco_pagePerformanceTitle" description-key="dashbraco_pagePerformanceDescription"></umb-box-header>
+            <div class="dashboard-content">
+            </div>
+        </umb-box>
+
+        <umb-box>
+            <umb-box-header title-key="dashbraco_trafficSourcesTitle" description-key="dashbraco_trafficSourcesDescription"></umb-box-header>
+            <div class="dashboard-content">
+            </div>
         </umb-box>
     </div>
 </div>
