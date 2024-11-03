@@ -1,14 +1,15 @@
-<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk.Razor">
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <StaticWebAssetBasePath>/</StaticWebAssetBasePath>
-    <ContentTargetFolders>.</ContentTargetFolders>  </PropertyGroup>
+    <ContentTargetFolders>.</ContentTargetFolders>
+  </PropertyGroup>
 
   <PropertyGroup>
     <PackageId>Our.Umbraco.Dashbraco</PackageId>
-    <Version>0.0.1</Version>
+    <Version>0.0.2</Version>
     <Product>Dashbraco - Dashboard for Umbraco</Product>
     <Title>Our.Umbraco.Dashbraco</Title>
     <Description>Dashbraco: An Umbraco dashboard package delivering real-time analytics, media management, and customizable widgets to enhance content and user insights.</Description>
@@ -30,6 +31,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="build.ps1" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="build\**\*.*">
+      <Pack>True</Pack>
+      <PackagePath>buildTransitive</PackagePath>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\dashbraco.png">
