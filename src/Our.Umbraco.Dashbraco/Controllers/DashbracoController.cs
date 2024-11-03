@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Our.Umbraco.Dashbraco.Models.Fronted;
+using Microsoft.Extensions.Options;
+using Our.Umbraco.Dashbraco.Models;
+using System.Runtime;
 using Umbraco.Cms.Core.Cache;
 using Umbraco.Cms.Core.Security;
 using Umbraco.Cms.Core.Services;
@@ -20,13 +22,15 @@ namespace Our.Umbraco.Dashbraco.Controllers
         private readonly IBackOfficeSecurity _security;
         private readonly IEntityService _entityService;
         private readonly IHttpClientFactory _httpClientFactory;
+        private readonly DashbracoSettings _settings;
 
         public DashbracoController(AppCaches appCaches,
             IScopeProvider scopeProvider,
             IUserService userService,
             IBackOfficeSecurity security,
             IEntityService entityService,
-            IHttpClientFactory httpClientFactory
+            IHttpClientFactory httpClientFactory,
+            IOptions<DashbracoSettings> settings
         )
         {
             _appCaches = appCaches;
@@ -35,7 +39,11 @@ namespace Our.Umbraco.Dashbraco.Controllers
             _security = security;
             _entityService = entityService;
             _httpClientFactory = httpClientFactory;
+            _settings = settings.Value;
         }
+
+        [HttpGet]
+        public DashbracoSettings GetConfig() => _settings;
 
         [HttpGet]
         public GAnalyticsModel GetAnalyticsData()

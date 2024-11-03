@@ -1,4 +1,4 @@
-﻿namespace Our.Umbraco.Dashbraco.Models.Fronted
+﻿namespace Our.Umbraco.Dashbraco.Models
 {
     public class GAnalyticsModel
     {

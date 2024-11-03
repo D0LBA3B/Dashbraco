@@ -1,24 +1,45 @@
-﻿<div ng-controller="Our.Umbraco.Dashbraco.Controller as vm" class="dashbraco">
-    <div class="dashboard-section">
-        <umb-box>
-            <umb-box-header title-key="dashbraco_overviewTitle" description-key="dashbraco_overviewDescription"></umb-box-header>
-            <div class="dashboard-content">
-                <p>Visitors: {{ vm.analyticsData.visitors }}</p>
-                <p>Page Views: {{ vm.analyticsData.pageViews }}</p>
-                <p>Average Session Duration: {{ vm.analyticsData.avgSessionDuration }}</p>
-            </div>
-        </umb-box>
+<div ng-controller="Our.Umbraco.Dashbraco.Controller as vm" class="dashbraco">
+    <div class="dashboard-tabs">
+        <!-- Menu -->
+        <ul class="tab-menu">
+            <li ng-class="{ active: vm.activeTab === 'pictureOfTheDay' }" ng-click="vm.setActiveTab('pictureOfTheDay')" ng-if="vm.showPictureOfTheDay">
+                Picture of the Day
+            </li>
+            <li ng-class="{ active: vm.activeTab === 'analytics' }" ng-click="vm.setActiveTab('analytics')">
+                Analytics
+            </li>
+        </ul>
 
-        <umb-box>
-            <umb-box-header title-key="dashbraco_pagePerformanceTitle" description-key="dashbraco_pagePerformanceDescription"></umb-box-header>
-            <div class="dashboard-content">
+        <div class="tab-content">
+            <!-- Analytics -->
+            <div ng-show="vm.activeTab === 'analytics'">
+                <umb-box>
+                    <umb-box-header title-key="dashbraco_overviewTitle" description-key="dashbraco_overviewDescription"></umb-box-header>
+                    <div class="dashboard-content">
+                        <p>Visitors: {{ vm.analyticsData.visitors }}</p>
+                        <p>Page Views: {{ vm.analyticsData.pageViews }}</p>
+                        <p>Average Session Duration: {{ vm.analyticsData.avgSessionDuration }}</p>
+                    </div>
+                </umb-box>
             </div>
-        </umb-box>
 
-        <umb-box>
-            <umb-box-header title-key="dashbraco_trafficSourcesTitle" description-key="dashbraco_trafficSourcesDescription"></umb-box-header>
-            <div class="dashboard-content">
+            <!-- Picture of the Day -->
+            <div ng-show="vm.activeTab === 'pictureOfTheDay'" ng-if="vm.showPictureOfTheDay">
+                <umb-box>
+                    <umb-box-header title="{{vm.pictureOfTheDayTitle}}"></umb-box-header>
+                    <div class="dashboard-content">
+                        <div ng-if="vm.pictureOfTheDay.media_type == 'image'">
+                            <figure>
+                                <figcaption>{{ vm.pictureOfTheDay.explanation }}</figcaption>
+                                <img src="{{ vm.pictureOfTheDay.hdurl }}" alt="{{ vm.pictureOfTheDay.title }}" />
+                            </figure>
+                        </div>
+                        <div ng-if="vm.pictureOfTheDay.media_type == 'video'">
+                            <iframe width="640" height="385" ng-src="{{ vm.trustSrc(vm.pictureOfTheDay.url) }}" frameborder="0"></iframe>
+                        </div>
+                    </div>
+                </umb-box>
             </div>
-        </umb-box>
+        </div>
     </div>
 </div>
