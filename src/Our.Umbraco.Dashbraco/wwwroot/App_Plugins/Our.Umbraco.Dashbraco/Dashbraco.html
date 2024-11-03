@@ -1,9 +1,11 @@
 <div ng-controller="Our.Umbraco.Dashbraco.Controller as vm" class="dashbraco">
     <div class="dashboard-tabs">
-        <!-- Menu -->
         <ul class="tab-menu">
             <li ng-class="{ active: vm.activeTab === 'pictureOfTheDay' }" ng-click="vm.setActiveTab('pictureOfTheDay')" ng-if="vm.showPictureOfTheDay">
                 Picture of the Day
+            </li>
+            <li ng-class="{ active: vm.activeTab === 'unusedMedia' }" ng-click="vm.setActiveTab('unusedMedia')" ng-if="vm.showUnusedMedia">
+                Unused Media
             </li>
             <li ng-class="{ active: vm.activeTab === 'analytics' }" ng-click="vm.setActiveTab('analytics')">
                 Analytics
@@ -11,7 +13,6 @@
         </ul>
 
         <div class="tab-content">
-            <!-- Analytics -->
             <div ng-show="vm.activeTab === 'analytics'">
                 <umb-box>
                     <umb-box-header title-key="dashbraco_overviewTitle" description-key="dashbraco_overviewDescription"></umb-box-header>
@@ -23,7 +24,6 @@
                 </umb-box>
             </div>
 
-            <!-- Picture of the Day -->
             <div ng-show="vm.activeTab === 'pictureOfTheDay'" ng-if="vm.showPictureOfTheDay">
                 <umb-box>
                     <umb-box-header title="{{vm.pictureOfTheDayTitle}}"></umb-box-header>
@@ -37,6 +37,41 @@
                         <div ng-if="vm.pictureOfTheDay.media_type == 'video'">
                             <iframe width="640" height="385" ng-src="{{ vm.trustSrc(vm.pictureOfTheDay.url) }}" frameborder="0"></iframe>
                         </div>
+                    </div>
+                </umb-box>
+            </div>
+
+            <div ng-show="vm.activeTab === 'unusedMedia'">
+                <umb-box>
+                    <umb-box-header title="Unused Media" description="List of unused media items"></umb-box-header>
+                    <div class="dashboard-content">
+                        <button class="btn-refresh" ng-click="vm.startUnusedMediaReport()" ng-disabled="vm.isProcessingMedia">
+                            Start Report
+                        </button>
+                        <div class="stats">
+                            <p>Total Media: <strong>{{ vm.totalAmountOfMedia }}</strong></p>
+                            <p>Unused Media: <strong>{{ vm.totalUnusedMedia }}</strong></p>
+                        </div>
+                        <table class="table unused-media-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="media in vm.unusedMedia">
+                                    <td>{{ media.id }}</td>
+                                    <td>{{ media.name }}</td>
+                                    <td>{{ media.type }}</td>
+                                    <td>
+                                        <button class="btn-action" ng-click="vm.moveItemToRecycling(media.id)">Move to Recycling</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </umb-box>
             </div>
