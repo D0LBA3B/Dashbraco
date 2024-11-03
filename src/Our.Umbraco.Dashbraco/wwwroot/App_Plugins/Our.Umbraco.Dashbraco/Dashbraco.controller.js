@@ -20,7 +20,6 @@
         vm.startUnusedMediaReport = function () {
             $http.get('backoffice/api/Dashbraco/StartUnusedMediaReport')
                 .then(function (response) {
-                    console.log(response.data);
                     vm.isProcessingMedia = true;
                     vm.unusedMedia = [];
                 })
@@ -43,9 +42,8 @@
         };
 
         vm.moveItemToRecycling = function (mediaId) {
-            $http.post('backoffice/api/Dashbraco/MoveItemToRecycling', { mediaId: mediaId })
+            $http.post(`backoffice/api/Dashbraco/MoveItemToRecycling?mediaId=${mediaId}`)
                 .then(function (response) {
-                    console.log(response.data);
                     vm.unusedMedia = vm.unusedMedia.filter(item => item.id !== mediaId);
                     vm.totalUnusedMedia = vm.unusedMedia.length;
                 })
@@ -79,7 +77,6 @@
         vm.trustSrc = function (src) {
             return $sce.trustAsResourceUrl(src);
         };
-
         return vm;
     }
 
