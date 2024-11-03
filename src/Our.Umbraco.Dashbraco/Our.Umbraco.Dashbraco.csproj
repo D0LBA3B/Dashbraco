@@ -11,7 +11,7 @@
     <Version>0.0.1</Version>
     <Product>Dashbraco - Dashboard for Umbraco</Product>
     <Title>Our.Umbraco.Dashbraco</Title>
-    <Description>Dashbraco is a modular dashboard package for Umbraco, designed to provide analytics and insights on site performance and user engagement directly within the CMS.</Description>
+    <Description>Dashbraco: An Umbraco dashboard package delivering real-time analytics, media management, and customizable widgets to enhance content and user insights.</Description>
     <PackageTags>umbraco plugin package analytics dashboard</PackageTags>
     <Authors>D0LBA3B</Authors>
     <Company>D0LBA3B</Company>
@@ -20,6 +20,8 @@
     <RepositoryUrl>https://github.com/D0LBA3B/Dashbraco</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>dashbraco.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,5 +30,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="build.ps1" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\dashbraco.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 </Project>
