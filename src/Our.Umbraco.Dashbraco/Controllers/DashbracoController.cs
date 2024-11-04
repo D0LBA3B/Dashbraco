@@ -17,37 +17,19 @@ namespace Our.Umbraco.Dashbraco.Controllers
     [JsonCamelCaseFormatter]
     public class DashbracoController : UmbracoAuthorizedJsonController
     {
-        private readonly AppCaches _appCaches;
-        private readonly IScopeProvider _scopeProvider;
-        private readonly IUserService _userService;
-        private readonly IBackOfficeSecurity _security;
-        private readonly IEntityService _entityService;
-        private readonly IHttpClientFactory _httpClientFactory;
         private readonly DashbracoSettings _settings;
         private readonly IMediaService _mediaService;
-        private readonly IRelationService _relationService;
+        private readonly IUnusedMediaService _unusedMediaService;
         private readonly MediaRemoveContextModel _mediaRemoveContext;
 
-        public DashbracoController(AppCaches appCaches,
-            IScopeProvider scopeProvider,
-            IUserService userService,
-            IBackOfficeSecurity security,
-            IEntityService entityService,
-            IHttpClientFactory httpClientFactory,
-            IOptions<DashbracoSettings> settings,
+        public DashbracoController(IOptions<DashbracoSettings> settings,
             IMediaService mediaService,
-            IRelationService relationService)
+            IUnusedMediaService unusedMediaService)
         {
-            _appCaches = appCaches;
-            _scopeProvider = scopeProvider;
-            _userService = userService;
-            _security = security;
-            _entityService = entityService;
-            _httpClientFactory = httpClientFactory;
             _settings = settings.Value;
             _mediaService = mediaService;
-            _relationService = relationService;
             _mediaRemoveContext = MediaRemoveContextModel.Current;
+            _unusedMediaService = unusedMediaService;
         }
 
         [HttpGet]
@@ -70,8 +52,7 @@ namespace Our.Umbraco.Dashbraco.Controllers
         {
             if (!_mediaRemoveContext.IsProcessingMedia)
             {
-                var unusedMediaService = new UnusedMediaService(_mediaService, _relationService);
-                Thread backgroundGetMedia = new Thread(unusedMediaService.FindUnusedMedia)
+                Thread backgroundGetMedia = new Thread(_unusedMediaService.FindUnusedMedia)
                 {
                     IsBackground = true,
                     Name = "UnusedMedia GetUnusedMedia"

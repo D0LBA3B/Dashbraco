@@ -1,7 +1,6 @@
 ﻿using Our.Umbraco.Dashbraco.Interfaces;
 using Our.Umbraco.Dashbraco.Models;
 using System.Collections.Concurrent;
-using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Services;
 
 namespace Our.Umbraco.Dashbraco.Services
@@ -25,17 +24,13 @@ namespace Our.Umbraco.Dashbraco.Services
             _mediaRemoveContext.TotalAmountOfMedia += children.Count();
 
             foreach (var mediaItem in children)
-            {
                 GetUnusedMediaItems(new MediaItemWrapperModel(mediaItem, root));
-            }
 
             if (children.Any()) return;
 
             var mediaRelations = _relationService.GetByChildId(root.Media.Id);
             if (!mediaRelations.Any() && root.Media.ContentType.Alias != "Folder")
-            {
                 _mediaRemoveContext.UnusedMedia.Add(root);
-            }
         }
 
         public void FindUnusedMedia()
@@ -48,10 +43,7 @@ namespace Our.Umbraco.Dashbraco.Services
             _mediaRemoveContext.TotalAmountOfMedia += mediaItems.Count();
 
             foreach (var mediaItem in mediaItems)
-            {
                 GetUnusedMediaItems(new MediaItemWrapperModel(mediaItem));
-            }
-
             _mediaRemoveContext.IsProcessingMedia = false;
         }
     }

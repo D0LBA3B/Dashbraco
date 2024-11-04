@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<language>
+  <area alias="dashboardTabs">
+    <key alias="Our.Umbraco.Dashbraco">Willkommen | Dashbraco ❤</key>
+    <key alias="pictureOfTheDayTab">Bild des Tages</key>
+    <key alias="unusedMediaTab">Unbenutzte Medien</key>
+    <key alias="analyticsTab">Analytik</key>
+  </area>
+  <area alias="dashbraco">
+    <key alias="overviewTitle">Übersicht</key>
+    <key alias="overviewDescription">Echtzeitstatistiken</key>
+    <key alias="pagePerformanceTitle">Seitenleistung</key>
+    <key alias="pagePerformanceDescription">Ladezeit und Benutzerinteraktionen</key>
+    <key alias="trafficSourcesTitle">Traffic-Quellen</key>
+    <key alias="trafficSourcesDescription">Herkunft der Besucher und Interaktionen</key>
+    <key alias="visitorsLabel">Besucher:</key>
+    <key alias="pageViewsLabel">Seitenaufrufe:</key>
+    <key alias="avgSessionDurationLabel">Durchschnittliche Sitzungsdauer:</key>
+    <key alias="unusedMediaTitle">Unbenutzte Medien</key>
+    <key alias="unusedMediaDescription">Liste der unbenutzten Medienobjekte</key>
+    <key alias="startReportButton">Bericht starten</key>
+    <key alias="totalMediaLabel">Gesamte Medien:</key>
+    <key alias="unusedMediaLabel">Unbenutzte Medien:</key>
+    <key alias="tableHeaderID">ID</key>
+    <key alias="tableHeaderName">Name</key>
+    <key alias="tableHeaderType">Typ</key>
+    <key alias="tableHeaderActions">Aktionen</key>
+    <key alias="moveToRecyclingButton">In den Papierkorb verschieben</key>
+  </area>
+</language>

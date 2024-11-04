@@ -1,8 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <language>
-	<area alias="dashboardTabs">
-		<key alias="Our.Umbraco.Dashbraco">Welcome | Dashbraco</key>
-	</area>
+  <area alias="dashboardTabs">
+    <key alias="Our.Umbraco.Dashbraco">Welcome | Dashbraco ❤</key>
+    <key alias="pictureOfTheDayTab">Picture of the Day</key>
+    <key alias="unusedMediaTab">Unused Media</key>
+    <key alias="analyticsTab">Analytics</key>
+  </area>
   <area alias="dashbraco">
     <key alias="overviewTitle">Overview</key>
     <key alias="overviewDescription">Real-time statistics</key>
@@ -10,5 +13,18 @@
     <key alias="pagePerformanceDescription">Loading time and user interactions</key>
     <key alias="trafficSourcesTitle">Traffic Sources</key>
     <key alias="trafficSourcesDescription">Visitor origins and interactions</key>
+    <key alias="visitorsLabel">Visitors:</key>
+    <key alias="pageViewsLabel">Page Views:</key>
+    <key alias="avgSessionDurationLabel">Average Session Duration:</key>
+    <key alias="unusedMediaTitle">Unused Media</key>
+    <key alias="unusedMediaDescription">List of unused media items</key>
+    <key alias="startReportButton">Start Report</key>
+    <key alias="totalMediaLabel">Total Media:</key>
+    <key alias="unusedMediaLabel">Unused Media:</key>
+    <key alias="tableHeaderID">ID</key>
+    <key alias="tableHeaderName">Name</key>
+    <key alias="tableHeaderType">Type</key>
+    <key alias="tableHeaderActions">Actions</key>
+    <key alias="moveToRecyclingButton">Move to Recycling</key>
   </area>
 </language>
