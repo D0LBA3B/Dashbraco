@@ -9,7 +9,7 @@
 
   <PropertyGroup>
     <PackageId>Our.Umbraco.Dashbraco</PackageId>
-    <Version>0.0.2</Version>
+    <Version>0.0.3</Version>
     <Product>Dashbraco - Dashboard for Umbraco</Product>
     <Title>Our.Umbraco.Dashbraco</Title>
     <Description>Dashbraco: An Umbraco dashboard package delivering real-time analytics, media management, and customizable widgets to enhance content and user insights.</Description>
