@@ -1,6 +1,24 @@
-﻿.dashbraco {
+﻿:root {
+    --primary-color: #f8f9fa;
+    --secondary-color: #e9ecef;
+    --text-color: #495057;
+    --active-tab-color: #007bff;
+    --inactive-tab-color: #e9ecef;
+    --background-color: #f8f9fa;
+    --border-color: #ddd;
+    --hover-color: #d1e7ff;
+    --button-color: #007bff;
+    --button-text-color: #fff;
+    --success-color: #28a745;
+    --warning-color: #ffc107;
+    --error-color: #dc3545;
+    --link-color: #007bff;
+    --link-hover-color: #0056b3;
+}
+
+.dashbraco {
     padding: 20px;
-    background-color: #f8f9fa;
+    background-color: var(--background-color);
 }
 
 .dashboard-tabs .tab-menu {
@@ -8,28 +26,29 @@
     list-style: none;
     padding: 0;
     margin: 0 0 20px 0;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--border-color);
 }
 
     .dashboard-tabs .tab-menu li {
         padding: 10px 20px;
         cursor: pointer;
-        background-color: #e9ecef;
+        background-color: var(--inactive-tab-color);
         margin-right: 10px;
         border-radius: 5px 5px 0 0;
         transition: background-color 0.3s ease;
+        color: var(--text-color);
     }
 
         .dashboard-tabs .tab-menu li.active {
-            background-color: #007bff;
-            color: #fff;
-            border: 1px solid #007bff;
+            background-color: var(--active-tab-color);
+            color: var(--button-text-color);
+            border: 1px solid var(--active-tab-color);
             border-bottom: none;
             font-weight: bold;
         }
 
         .dashboard-tabs .tab-menu li:hover {
-            background-color: #d1e7ff;
+            background-color: var(--hover-color);
         }
 
 .tab-content {
@@ -40,7 +59,7 @@
 
     .tab-content umb-box {
         width: 100%;
-        background: #fff;
+        background: var(--background-color);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         border-radius: 8px;
         overflow: hidden;
@@ -49,15 +68,16 @@
         .tab-content umb-box .dashboard-content {
             padding: 20px;
             font-size: 14px;
+            color: var(--text-color);
         }
 
-        .dashboard-content {
-            padding: 30px;
-        }
+.dashboard-content {
+    padding: 30px;
+}
 
 .btn-refresh {
-    background-color: #007bff;
-    color: #fff;
+    background-color: var(--button-color);
+    color: var(--button-text-color);
     padding: 8px 12px;
     border: none;
     border-radius: 4px;
@@ -67,13 +87,13 @@
 }
 
     .btn-refresh:disabled {
-        background-color: #6c757d;
+        background-color: var(--border-color);
         cursor: not-allowed;
         opacity: 0.6;
     }
 
     .btn-refresh:active {
-        background-color: #0056b3;
+        background-color: var(--link-hover-color);
     }
 
     .btn-refresh.loading::after {
@@ -84,7 +104,7 @@
 .stats {
     margin: 10px 0;
     font-size: 15px;
-    color: #495057;
+    color: var(--text-color);
 }
 
 .table.unused-media-table {
@@ -97,22 +117,22 @@
     .table.unused-media-table td {
         padding: 10px;
         text-align: left;
-        border-bottom: 1px solid #ddd;
+        border-bottom: 1px solid var(--border-color);
     }
 
     .table.unused-media-table th {
-        background-color: #f1f1f1;
+        background-color: var(--secondary-color);
         font-weight: bold;
-        color: #343a40;
+        color: var(--text-color);
     }
 
     .table.unused-media-table tr:hover {
-        background-color: #f9f9f9;
+        background-color: var(--hover-color);
     }
 
 .btn-action {
-    background-color: #dc3545;
-    color: #fff;
+    background-color: var(--error-color);
+    color: var(--button-text-color);
     padding: 5px 10px;
     border: none;
     border-radius: 4px;
@@ -122,4 +142,13 @@
 
     .btn-action:hover {
         background-color: #c82333;
+    }
+
+a {
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+    a:hover {
+        color: var(--link-hover-color);
     }

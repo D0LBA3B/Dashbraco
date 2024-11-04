@@ -57,6 +57,25 @@
             vm.showPictureOfTheDay = defaultWidgets.includes("PictureOfTheDay");
             vm.showUnusedMedia = defaultWidgets.includes("UnusedMedia");
 
+            var colors = configRes.data.styles;
+            if (colors) {
+                document.documentElement.style.setProperty('--primary-color', colors.primaryColor);
+                document.documentElement.style.setProperty('--secondary-color', colors.secondaryColor);
+                document.documentElement.style.setProperty('--text-color', colors.textColor);
+                document.documentElement.style.setProperty('--active-tab-color', colors.activeTabColor);
+                document.documentElement.style.setProperty('--inactive-tab-color', colors.inactiveTabColor);
+                document.documentElement.style.setProperty('--background-color', colors.backgroundColor);
+                document.documentElement.style.setProperty('--border-color', colors.borderColor);
+                document.documentElement.style.setProperty('--hover-color', colors.hoverColor);
+                document.documentElement.style.setProperty('--button-color', colors.buttonColor);
+                document.documentElement.style.setProperty('--button-text-color', colors.buttonTextColor);
+                document.documentElement.style.setProperty('--success-color', colors.successColor);
+                document.documentElement.style.setProperty('--warning-color', colors.warningColor);
+                document.documentElement.style.setProperty('--error-color', colors.errorColor);
+                document.documentElement.style.setProperty('--link-color', colors.linkColor);
+                document.documentElement.style.setProperty('--link-hover-color', colors.linkHoverColor);
+            }
+
             if (vm.showPictureOfTheDay) {
                 vm.activeTab = 'pictureOfTheDay';
                 userService.getCurrentUser().then(function (user) {
