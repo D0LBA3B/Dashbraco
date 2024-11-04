@@ -15,6 +15,9 @@
             if (tab === 'unusedMedia') {
                 vm.getUnusedMediaReport();
             }
+            if (tab === 'analytics') {
+                vm.loadAnalyticsData();
+            }
         };
 
         vm.startUnusedMediaReport = function () {
@@ -89,9 +92,49 @@
             }
         });
 
-        $http.get('backoffice/api/Dashbraco/GetAnalyticsData').then(function (res) {
-            vm.analyticsData = res.data;
-        });
+        vm.loadAnalyticsData = function () {
+            $http.get('backoffice/api/Dashbraco/GetAnalyticsData').then(function (res) {
+                vm.analyticsData = res.data;
+
+                if (vm.analyticsData.bounceRate) {
+                    vm.analyticsData.bounceRate = (parseFloat(vm.analyticsData.bounceRate) * 100).toFixed(2);
+                }
+            });
+
+            $http.get('backoffice/api/Dashbraco/GetDailyActiveUsers').then(function (res) {
+                vm.dailyActiveUsers = res.data;
+                vm.initChart();
+            });
+        };
+
+        vm.initChart = function () {
+            var dates = vm.dailyActiveUsers.map(data => data.date);
+            var activeUsers = vm.dailyActiveUsers.map(data => data.activeUsers);
+
+            var options = {
+                chart: {
+                    type: 'bar',
+                    height: 350
+                },
+                series: [{
+                    name: 'Active users',
+                    data: dates.map((date, index) => [new Date(date).getTime(), activeUsers[index]])
+                }],
+                xaxis: {
+                    type: 'datetime',
+                    title: { text: 'Date' }
+                },
+                yaxis: {
+                    title: { text: 'Active users' }
+                },
+                title: {
+                    text: "Number of active users per day(last 30 days)"
+                }
+            };
+
+            var chart = new ApexCharts(document.querySelector("#analyticsChart"), options);
+            chart.render();
+        };
 
         vm.trustSrc = function (src) {
             return $sce.trustAsResourceUrl(src);

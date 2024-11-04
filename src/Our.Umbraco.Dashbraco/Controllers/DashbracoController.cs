@@ -2,11 +2,7 @@
 using Microsoft.Extensions.Options;
 using Our.Umbraco.Dashbraco.Interfaces;
 using Our.Umbraco.Dashbraco.Models;
-using Our.Umbraco.Dashbraco.Services;
-using Umbraco.Cms.Core.Cache;
-using Umbraco.Cms.Core.Security;
 using Umbraco.Cms.Core.Services;
-using Umbraco.Cms.Infrastructure.Scoping;
 using Umbraco.Cms.Web.BackOffice.Controllers;
 using Umbraco.Cms.Web.BackOffice.Filters;
 using Umbraco.Cms.Web.Common.Attributes;
@@ -21,31 +17,30 @@ namespace Our.Umbraco.Dashbraco.Controllers
         private readonly IMediaService _mediaService;
         private readonly IUnusedMediaService _unusedMediaService;
         private readonly MediaRemoveContextModel _mediaRemoveContext;
+        private readonly IGoogleAnalyticsService _googleAnalyticsService;
 
         public DashbracoController(IOptions<DashbracoSettings> settings,
             IMediaService mediaService,
-            IUnusedMediaService unusedMediaService)
+            IUnusedMediaService unusedMediaService,
+            IGoogleAnalyticsService googleAnalyticsService)
         {
             _settings = settings.Value;
             _mediaService = mediaService;
             _mediaRemoveContext = MediaRemoveContextModel.Current;
             _unusedMediaService = unusedMediaService;
+            _googleAnalyticsService = googleAnalyticsService;
         }
 
         [HttpGet]
         public DashbracoSettings GetConfig() => _settings;
 
         [HttpGet]
-        public GAnalyticsModel GetAnalyticsData()
-        {
-            var data = new GAnalyticsModel
-            {
-                Visitors = "125",
-                PageViews = "512",
-                AvgSessionDuration = 225
-            };
-            return data;
-        }
+        public async Task<GAnalyticsModel> GetAnalyticsData()
+        => await _googleAnalyticsService.GetMonthlyAnalyticsDataAsync();
+
+        [HttpGet]
+        public async Task<List<DailyActiveUsersModel>> GetDailyActiveUsers()
+        => await _googleAnalyticsService.GetDailyActiveUsersAsync();
 
         [HttpGet]
         public IActionResult StartUnusedMediaReport()
@@ -67,12 +62,12 @@ namespace Our.Umbraco.Dashbraco.Controllers
         [HttpGet]
         public MediaReportModel GetUnusedMediaReportStatus()
         => new MediaReportModel
-            {
-                IsProcessingMedia = _mediaRemoveContext.IsProcessingMedia,
-                Data = _mediaRemoveContext.UnusedMedia.Select(x => x.Model),
-                TotalAmountOfMedia = _mediaRemoveContext.TotalAmountOfMedia,
-                TotalUnusedMedia = _mediaRemoveContext.UnusedMedia.Count
-            };
+        {
+            IsProcessingMedia = _mediaRemoveContext.IsProcessingMedia,
+            Data = _mediaRemoveContext.UnusedMedia.Select(x => x.Model),
+            TotalAmountOfMedia = _mediaRemoveContext.TotalAmountOfMedia,
+            TotalUnusedMedia = _mediaRemoveContext.UnusedMedia.Count
+        };
 
         public List<UnusedMediaModel> GetUnusedMediaReport()
         {

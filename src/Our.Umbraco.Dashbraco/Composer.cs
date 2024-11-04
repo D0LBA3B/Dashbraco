@@ -11,7 +11,9 @@ namespace Our.Umbraco.Dashbraco
         public void Compose(IUmbracoBuilder builder)
         {
             builder.Services.Configure<DashbracoSettings>(builder.Config.GetSection("Dashbraco"));
+            
             builder.Services.AddScoped<IUnusedMediaService, UnusedMediaService>();            
+            builder.Services.AddSingleton<IGoogleAnalyticsService, GoogleAnalyticsService>();            
             builder.Dashboards().Add<DashbracoDashboard>();
         }
     }

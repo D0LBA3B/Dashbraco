@@ -1,3 +1,4 @@
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <div ng-controller="Our.Umbraco.Dashbraco.Controller as vm" class="dashbraco">
     <div class="dashboard-tabs">
         <ul class="tab-menu">
@@ -19,7 +20,9 @@
                     <div class="dashboard-content">
                         <p><localize key="dashbraco_visitorsLabel">Visitors:</localize> {{ vm.analyticsData.visitors }}</p>
                         <p><localize key="dashbraco_pageViewsLabel">Page Views:</localize> {{ vm.analyticsData.pageViews }}</p>
-                        <p><localize key="dashbraco_avgSessionDurationLabel">Average Session Duration:</localize> {{ vm.analyticsData.avgSessionDuration }}</p>
+                        <p><localize key="dashbraco_sessionsLabel">Sessions:</localize> {{ vm.analyticsData.sessions }}</p>
+                        <p><localize key="dashbraco_bounceRateLabel">Bounce Rate:</localize> {{ vm.analyticsData.bounceRate }}%</p>
+                        <div id="analyticsChart" style="min-height: 365px;"></div>
                     </div>
                 </umb-box>
             </div>
