@@ -10,10 +10,10 @@
   - **Media Management**: Delete or move unused media to the recycle bin directly from the dashboard.
 - **Widget Customization**: Enable or disable dashboard widgets to meet the specific needs of your site.
 - **Picture of the Day**: Display an inspiring picture or video of the day from NASA’s APOD (Astronomy Picture of the Day) API.
+- **Analytics Overview**: View analytics data in real-time including the number of visitors, page views, sessions, and bounce rate, with graphical representation of active users.
 
 ## Planned Features
 
-- **Real-Time Analytics**: View site data in real time, including visitors, page views, and average session duration.
 - **Traffic Sources**: Understand where visitors are coming from and how they interact with content.
 - **Page Performance**: Analyze loading times and user interactions for each page.
 - **Advanced Dashboard Customization**: Create personalized dashboards with selected widgets and metrics.
@@ -24,37 +24,64 @@
 
 ## Installation
 
-The package will be available on Nuget
+You can install Dashbraco via [NuGet](https://www.nuget.org/packages/Our.Umbraco.Dashbraco/):
 
-## Usage
+```bash
+dotnet add package Our.Umbraco.Dashbraco
+```
 
-Once installed, Dashbraco can be accessed in the "Dashboard" section of the Umbraco Backoffice. Available features include:
 
-1. **Analytics Overview**: Displays a summary of real-time analytics, including visits and page views.
-2. **Unused Media Management**: Run reports, export lists, and move unused media to the recycle bin for optimized management.
-3. **Widget Customization**: Select the widgets most relevant to your dashboard.
 
-> **Note**: Additional features are in development and will be added in future releases.
+## Demo
+_All colors are editable & tabs can be disabled/enabled via appsettings (my choice of color is disgusting I guess ahaha)_
+
+![image](https://github.com/user-attachments/assets/556209bc-ef0c-4ead-9041-c91d13cf9070)
+
+![image](https://github.com/user-attachments/assets/5839fd20-346e-4645-802e-09388d6c8f1f)
+
+
 
 ## Configuration
 
 Dashbraco supports configuration settings in `appsettings.json`:
 
 ```json
-{
-    "Dashbraco": {
-        "DefaultWidgets": ["Analytics", "PictureOfTheDay", "UnusedMedia"],
-        "RefreshInterval": 300,
-        "GoogleAnalyticsPropertyId": "PROPERTY_ID",
-        "CredentialsPath": "credentials.json"
+  "Dashbraco": {
+    "DefaultWidgets": [ "Analytics", "PictureOfTheDay", "UnusedMedia" ],
+    "RefreshInterval": 300,
+    "GoogleAnalyticsPropertyId": "99999999",
+    "GoogleCredentials": {
+      "type": "service_account",
+      "project_id": "YOUR_PROJECT_ID",
+      "private_key_id": "YOUR_PRIVATE_KEY_ID",
+      "private_key": "-----BEGIN PRIVATE KEY-----\nYOUR_PRIVATE_KEY\n-----END PRIVATE KEY-----\n",
+      "client_email": "YOUR_CLIENT_EMAIL",
+      "client_id": "YOUR_CLIENT_ID",
+      "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+      "token_uri": "https://oauth2.googleapis.com/token",
+      "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+      "client_x509_cert_url": "YOUR_CERT_URL"
+    },
+    "Styles": {
+      "PrimaryColor": "#F3F3F3",
+      "SecondaryColor": "#F3F3F3",
+      "TextColor": "#333333",
+      "ActiveTabColor": "#A8322E",
+      "InactiveTabColor": "#FF5733",
+      "BackgroundColor": "#FFFFFF",
+      "BorderColor": "#E0E0E0",
+      "HoverColor": "#FF7043",
+      "ButtonColor": "#3BCF0A",
+      "ButtonTextColor": "#FFFFFF",
+      "SuccessColor": "#28A745",
+      "WarningColor": "#FFC107",
+      "ErrorColor": "#C0392B",
+      "LinkColor": "#007BFF",
+      "LinkHoverColor": "#0056B3"
     }
-}
+  },
 ```
 
-- **DefaultWidgets**: Specifies which widgets are displayed on the dashboard by default.
-- **RefreshInterval**: Sets how often data refreshes in seconds (default is 5 minutes).
-- **GoogleAnalyticsPropertyId**: The property ID for Google Analytics integration.
-- **CredentialsPath**: The path to the Google service account credentials file.
 
 ## Contribution
 
