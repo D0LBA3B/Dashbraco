@@ -18,17 +18,23 @@ namespace Our.Umbraco.Dashbraco.Services
         {
             _settings = settings.Value;
 
-            var jsonCredentials = JsonConvert.SerializeObject(settings.Value.GoogleCredentials);
-            var credential = GoogleCredential.FromJson(jsonCredentials).CreateScoped(AnalyticsDataService.Scope.AnalyticsReadonly);
-            _analyticsDataService = new AnalyticsDataService(new BaseClientService.Initializer
+            try
             {
-                HttpClientInitializer = credential,
-                ApplicationName = "Dashbraco"
-            });
+                var jsonCredentials = JsonConvert.SerializeObject(settings.Value.GoogleCredentials);
+                var credential = GoogleCredential.FromJson(jsonCredentials).CreateScoped(AnalyticsDataService.Scope.AnalyticsReadonly);
+                _analyticsDataService = new AnalyticsDataService(new BaseClientService.Initializer
+                {
+                    HttpClientInitializer = credential,
+                    ApplicationName = "Dashbraco"
+                });
+            } catch (Exception ex) { }
         }
 
         public async Task<GAnalyticsModel> GetMonthlyAnalyticsDataAsync()
         {
+            if (_analyticsDataService is null)
+                return new GAnalyticsModel();
+
             var dateRange = new DateRange
             {
                 StartDate = "30daysAgo",
@@ -51,6 +57,9 @@ namespace Our.Umbraco.Dashbraco.Services
 
             var response = await _analyticsDataService.Properties.RunReport(request, "properties/" + _settings.GoogleAnalyticsPropertyId).ExecuteAsync();
 
+            if(response is null || response?.Rows?.Count == 0)
+                return new GAnalyticsModel();
+
             var users = response.Rows[0].MetricValues[0].Value;
             var pageViews = response.Rows[0].MetricValues[1].Value;
             var sessions = response.Rows[0].MetricValues[2].Value;
@@ -67,6 +76,9 @@ namespace Our.Umbraco.Dashbraco.Services
 
         public async Task<List<DailyActiveUsersModel>> GetDailyActiveUsersAsync()
         {
+            if (_analyticsDataService is null)
+                return new List<DailyActiveUsersModel>();
+
             var dateRange = new DateRange
             {
                 StartDate = "30daysAgo",
@@ -84,6 +96,9 @@ namespace Our.Umbraco.Dashbraco.Services
             };
 
             var response = await _analyticsDataService.Properties.RunReport(request, "properties/" + _settings.GoogleAnalyticsPropertyId).ExecuteAsync();
+
+            if (response is null || response?.Rows?.Count == 0)
+                return new List<DailyActiveUsersModel>();
 
             var dailyData = response.Rows.Select(row => new DailyActiveUsersModel
             {
