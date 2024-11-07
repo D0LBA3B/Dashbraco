@@ -23,6 +23,18 @@
             });
         }
 
+        var setInitialActiveTab = function () {
+            if (vm.showEntriesActivites) {
+                vm.activeTab = 'entriesActivites';
+            } else if (vm.showPictureOfTheDay) {
+                vm.activeTab = 'pictureOfTheDay';
+            } else if (vm.showUnusedMedia) {
+                vm.activeTab = 'unusedMedia';
+            } else if (vm.showAnalytics) {
+                vm.activeTab = 'analytics';
+            }
+        };
+
         vm.setActiveTab = function (tab) {
             vm.activeTab = tab;
             if (tab === 'unusedMedia') {
@@ -99,7 +111,6 @@
             }
 
             if (vm.showPictureOfTheDay) {
-                vm.activeTab = 'pictureOfTheDay';
                 userService.getCurrentUser().then(function (user) {
                     vm.pictureOfTheDayTitle = "Welcome " + user.name + ", here is an umbazing picture for you!";
                 });
@@ -109,6 +120,7 @@
                         vm.pictureOfTheDay = response.data;
                     });
             }
+            setInitialActiveTab();
         });
 
         vm.loadAnalyticsData = function () {
