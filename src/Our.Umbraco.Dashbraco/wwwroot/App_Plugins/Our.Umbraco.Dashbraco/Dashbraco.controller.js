@@ -11,6 +11,18 @@
         vm.totalUnusedMedia = 0;
         vm.activeTab = null;
 
+        var processDates = function (arrItemsToProcess, callback) {
+            userService.getCurrentUser().then(function (currentUser) {
+                angular.forEach(arrItemsToProcess, function (item) {
+                    item.datestampFormatted = dateHelper.getLocalDate(item.datestamp, currentUser.locale, 'LLL');
+                    if (item.scheduledPublishDate != null) {
+                        item.scheduledPublishDateFormatted = dateHelper.getLocalDate(item.datestamp, currentUser.locale, 'LLL');
+                    }
+                });
+                callback();
+            });
+        }
+
         vm.setActiveTab = function (tab) {
             vm.activeTab = tab;
             if (tab === 'unusedMedia') {
@@ -60,7 +72,12 @@
             var defaultWidgets = configRes.data.defaultWidgets;
             vm.showPictureOfTheDay = defaultWidgets.includes("PictureOfTheDay");
             vm.showUnusedMedia = defaultWidgets.includes("UnusedMedia");
+            vm.showAnalytics = defaultWidgets.includes("Analytics");
             vm.showEntriesActivites = defaultWidgets.includes("EntriesActivites");
+
+            if (vm.showEntriesActivites) {
+                vm.loadRecentActivities();
+            }
 
             var colors = configRes.data.styles;
             if (colors) {
@@ -144,6 +161,17 @@
 
             var chart = new ApexCharts(document.querySelector("#analyticsChart"), options);
             chart.render();
+        };
+
+        vm.loadRecentActivities = function () {
+            $http.get('backoffice/api/Dashbraco/GetAllRecentActivities').then(function (res) {
+                processDates(res.data.allItems, function () {
+                    processDates(res.data.yourItems, function () {
+                        vm.recentActivities = res.data;
+                    });
+                });
+
+            });
         };
 
         vm.trustSrc = function (src) {

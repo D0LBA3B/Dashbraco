@@ -8,9 +8,10 @@
             <li ng-class="{ active: vm.activeTab === 'unusedMedia' }" ng-click="vm.setActiveTab('unusedMedia')" ng-if="vm.showUnusedMedia">
                 <localize key="dashbraco_unusedMediaTab">Unused Media</localize>
             </li>
-            <li ng-class="{ active: vm.activeTab === 'analytics' }" ng-click="vm.setActiveTab('analytics')">
+            <li ng-class="{ active: vm.activeTab === 'analytics' }" ng-click="vm.setActiveTab('analytics')" ng-if="vm.showAnalytics">
                 <localize key="dashbraco_analyticsTab">Analytics</localize>
             </li>
+            <li ng-class="{ active: vm.activeTab === 'entriesActivites' }" ng-click="vm.setActiveTab('entriesActivites')" ng-if="vm.showEntriesActivites">Recent activities</li>
         </ul>
 
         <div class="tab-content">
@@ -83,6 +84,46 @@
                             </tbody>
                         </table>
                     </div>
+                </umb-box>
+            </div>
+
+            <div ng-show="vm.activeTab === 'showEntriesActivites'">
+                <umb-box>
+                    <umb-box-header title-key="dashbraco_recentActivities" description-key="dashbraco_recentActivitiesDescription"></umb-box-header>
+                    <umb-box-content>
+
+                        <div ng-repeat="item in vm.recentActivities.allItems" class="recentActivity">
+
+                            <umb-avatar name="{{item.user.name}}"
+                                        size="xs"
+                                        color="secondary"
+                                        img-src="{{item.user.avatar[0]}}"
+                                        img-srcset="{{item.user.avatar[1]}} 2x, {{item.user.avatar[2]}} 3x">
+                            </umb-avatar>
+
+                            <div>
+                                <span class="dashbraco-datetime">{{item.datestampFormatted}}</span>
+                                <p ng-if="item.activityType =='Save'">
+                                    {{item.user.name}} <localize key="dashbraco_saved">saved</localize> <a href="/umbraco/#/content/content/edit/{{item.nodeId}}">{{item.nodeName}}</a> <localize key="dashbraco_butDidNotPublish">but did not publish</localize>.
+                                </p>
+                                <p ng-if="item.activityType =='SaveAndScheduled'">
+                                    {{item.user.name}} <localize key="dashbraco_savedAndScheduled">saved and scheduled</localize> <a href="/umbraco/#/content/content/edit/{{item.nodeId}}">{{item.nodeName}}</a> <localize key="dashbraco_forPublishingAt">for publishing at</localize> {{item.scheduledPublishDateFormatted}}.
+                                </p>
+                                <p ng-if="item.activityType =='Publish'">
+                                    {{item.user.name}} <localize key="dashbraco_savedAndPublished">saved and published</localize> <a href="/umbraco/#/content/content/edit/{{item.nodeId}}">{{item.nodeName}}</a>.
+                                </p>
+                                <p ng-if="item.activityType =='Unpublish'">
+                                    {{item.user.name}} <localize key="dashbraco_unpublished">unpublished</localize> <a href="/umbraco/#/content/content/edit/{{item.nodeId}}">{{item.nodeName}}</a>.
+                                </p>
+                                <p ng-if="item.activityType =='RecycleBin'">
+                                    {{item.user.name}} <localize key="dashbraco_moved">moved</localize> <a href="/umbraco/#/content/content/edit/{{item.nodeId}}">{{item.nodeName}}</a> <localize key="dashbraco_to">to</localize> <a href="/umbraco/#/content/content/recyclebin"><localize key="dashbraco_recycleBin">recycle bin</localize></a>.
+                                </p>
+                                <p ng-if="item.activityType =='RollBack'">
+                                    {{item.user.name}} <localize key="dashbraco_rolledBack">rolled back</localize> <a href="/umbraco/#/content/content/edit/{{item.nodeId}}">{{item.nodeName}}</a>
+                                </p>
+                            </div>
+                        </div>
+                    </umb-box-content>
                 </umb-box>
             </div>
         </div>
