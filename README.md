@@ -8,6 +8,12 @@
 - **Unused Media List**: Identify unused media items to optimize storage space and improve site performance.
   - **Media Reports**: Run reports to view all unused media and download results as a CSV file.
   - **Media Management**: Delete or move unused media to the recycle bin directly from the dashboard.
+
+- **Recent User Activities**: Monitor and display the latest activities performed by users on your site.      
+  - **Activity Feed**: View a detailed list of recent actions such as content publishing, editing, unpublishing, and more.
+  - **User Avatars**: Display user avatars next to their activities for easy identification.
+  - **Interactive Links**: Quickly navigate to the related content items linked to each activity.
+
 - **Widget Customization**: Enable or disable dashboard widgets to meet the specific needs of your site.
 - **Picture of the Day**: Display an inspiring picture or video of the day from NASA’s APOD (Astronomy Picture of the Day) API.
 - **Analytics Overview**: View analytics data in real-time including the number of visitors, page views, sessions, and bounce rate, with graphical representation of active users.
@@ -35,7 +41,11 @@ dotnet add package Our.Umbraco.Dashbraco
 ## Demo
 _All colors are editable & tabs can be disabled/enabled via appsettings (my choice of color is disgusting I guess ahaha)_
 
+![image](https://github.com/user-attachments/assets/74573ebb-7e67-43ac-86c3-180a9ea81d1b)
+
+
 ![image](https://github.com/user-attachments/assets/556209bc-ef0c-4ead-9041-c91d13cf9070)
+
 
 ![image](https://github.com/user-attachments/assets/5839fd20-346e-4645-802e-09388d6c8f1f)
 
@@ -47,7 +57,7 @@ Dashbraco supports configuration settings in `appsettings.json`:
 
 ```json
   "Dashbraco": {
-    "DefaultWidgets": [ "Analytics", "PictureOfTheDay", "UnusedMedia" ],
+    "DefaultWidgets": [ "Analytics", "PictureOfTheDay", "UnusedMedia". "EntriesActivites" ],
     "RefreshInterval": 300,
     "GoogleAnalyticsPropertyId": "99999999",
     "GoogleCredentials": {
