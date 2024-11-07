@@ -57,7 +57,7 @@ Dashbraco supports configuration settings in `appsettings.json`:
 
 ```json
   "Dashbraco": {
-    "DefaultWidgets": [ "Analytics", "PictureOfTheDay", "UnusedMedia". "EntriesActivites" ],
+    "DefaultWidgets": [ "Analytics", "PictureOfTheDay", "UnusedMedia", "EntriesActivites" ],
     "RefreshInterval": 300,
     "GoogleAnalyticsPropertyId": "99999999",
     "GoogleCredentials": {
