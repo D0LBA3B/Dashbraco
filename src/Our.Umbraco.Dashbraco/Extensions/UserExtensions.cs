@@ -21,9 +21,7 @@ namespace Our.Umbraco.Dashbraco.Extensions
             // and the website will not run.
             // Also, check if the user has explicitly removed all avatars including a Gravatar, this will be possible and the value will be "none"
             if (userAvatar == "none" || CryptoConfig.AllowOnlyFipsAlgorithms)
-            {
                 return new string[0];
-            }
 
             if (userAvatar.IsNullOrWhiteSpace())
             {
@@ -44,7 +42,6 @@ namespace Our.Umbraco.Dashbraco.Extensions
                     }
                     catch (Exception)
                     {
-                        // There was an HTTP or other error, return an null instead
                         return false;
                     }
                 });
@@ -77,10 +74,7 @@ namespace Our.Umbraco.Dashbraco.Extensions
 
         }
 
-        internal static string GetAvatarCrop(string url, int dimensions)
-        {
-            return url + $"?width={dimensions}&height={dimensions}&mode=crop";
-        }
+        internal static string GetAvatarCrop(string url, int dimensions) => url + $"?width={dimensions}&height={dimensions}&mode=crop";
 
         internal static string HashEmailForGravatar(string email)
         {
@@ -90,12 +84,8 @@ namespace Our.Umbraco.Dashbraco.Extensions
             StringBuilder sBuilder = new StringBuilder();
 
             for (int i = 0; i < data.Length; i++)
-            {
                 sBuilder.Append(data[i].ToString("x2"));
-            }
-
             return sBuilder.ToString();
         }
-
     }
 }

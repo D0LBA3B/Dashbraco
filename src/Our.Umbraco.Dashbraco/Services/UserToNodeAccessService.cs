@@ -37,7 +37,6 @@ namespace Our.Umbraco.Dashbraco.Services
                 ids.AddRange(nodeIds);
             }
             return ids.Distinct().ToArray();
-
         }
 
         public bool HasAccessTo(IUmbracoNodeWithPermissions node)

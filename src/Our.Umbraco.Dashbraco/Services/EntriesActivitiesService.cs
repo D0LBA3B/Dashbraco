@@ -9,10 +9,7 @@ namespace Our.Umbraco.Dashbraco.Services
     {
         private readonly IScopeProvider _scopeProvider;
 
-        public EntriesActivitiesService(IScopeProvider scopeProvider)
-        {
-            _scopeProvider = scopeProvider;
-        }
+        public EntriesActivitiesService(IScopeProvider scopeProvider) => _scopeProvider = scopeProvider;
 
         public List<LogEntryDto> GetEntries()
         {
@@ -47,9 +44,7 @@ namespace Our.Umbraco.Dashbraco.Services
 
 
                     var sql = scope.Database.DatabaseType == DatabaseType.SQLite ? $"SELECT {coreSql} Limit 500" : $"Select Top(500) {coreSql}";
-
                     var res = scope.Database.Fetch<LogEntryDto>(sql);
-
                     return res;
                 }
             }

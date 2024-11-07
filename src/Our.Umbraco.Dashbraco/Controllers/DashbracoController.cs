@@ -128,7 +128,6 @@ namespace Our.Umbraco.Dashbraco.Controllers
         [HttpGet]
         public RecentActivitiesModel GetAllRecentActivities()
         {
-
             var model = new RecentActivitiesModel()
             {
                 AllItems = new List<RecentActivityModel>(),
