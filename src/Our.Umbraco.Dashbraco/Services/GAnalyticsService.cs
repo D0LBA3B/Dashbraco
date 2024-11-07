@@ -13,6 +13,7 @@ namespace Our.Umbraco.Dashbraco.Services
     {
         private readonly DashbracoSettings _settings;
         private readonly AnalyticsDataService _analyticsDataService;
+        private string _error;
 
         public GoogleAnalyticsService(IOptions<DashbracoSettings> settings)
         {
@@ -21,13 +22,25 @@ namespace Our.Umbraco.Dashbraco.Services
             try
             {
                 var jsonCredentials = JsonConvert.SerializeObject(settings.Value.GoogleCredentials);
-                var credential = GoogleCredential.FromJson(jsonCredentials).CreateScoped(AnalyticsDataService.Scope.AnalyticsReadonly);
+                var credential = GoogleCredential.FromJson(jsonCredentials)
+                    .CreateScoped(AnalyticsDataService.Scope.AnalyticsReadonly);
                 _analyticsDataService = new AnalyticsDataService(new BaseClientService.Initializer
                 {
                     HttpClientInitializer = credential,
                     ApplicationName = "Dashbraco"
                 });
-            } catch (Exception ex) { }
+            }
+            catch (Exception ex)
+            {
+                _error = $": \"{ex.Message}\"";
+            }
+        }
+
+        public Task<(bool, string)> CheckConfig()
+        {
+            if (_analyticsDataService is null)
+                return Task.FromResult((false, "Google Analytics credentials are not set or are invalid" + _error));
+            return Task.FromResult((true, "Google Analytics credentials are set and valid."));
         }
 
         public async Task<GAnalyticsModel> GetMonthlyAnalyticsDataAsync()

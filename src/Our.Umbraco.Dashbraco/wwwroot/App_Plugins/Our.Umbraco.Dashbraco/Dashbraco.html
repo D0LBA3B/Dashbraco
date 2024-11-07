@@ -18,11 +18,16 @@
                 <umb-box>
                     <umb-box-header title-key="dashbraco_overviewTitle" description-key="dashbraco_overviewDescription"></umb-box-header>
                     <div class="dashboard-content">
-                        <p><localize key="dashbraco_visitorsLabel">Visitors:</localize> {{ vm.analyticsData.visitors }}</p>
-                        <p><localize key="dashbraco_pageViewsLabel">Page Views:</localize> {{ vm.analyticsData.pageViews }}</p>
-                        <p><localize key="dashbraco_sessionsLabel">Sessions:</localize> {{ vm.analyticsData.sessions }}</p>
-                        <p><localize key="dashbraco_bounceRateLabel">Bounce Rate:</localize> {{ vm.analyticsData.bounceRate }}%</p>
-                        <div id="analyticsChart" style="min-height: 365px;"></div>
+                        <div ng-if="vm.haveAnalyticsError">
+                            <p style="color: red;">{{ vm.analyticsErrorContent }}</p>
+                        </div>
+                        <div ng-if="!vm.haveAnalyticsError">
+                            <p><localize key="dashbraco_visitorsLabel">Visitors:</localize> {{ vm.analyticsData.visitors }}</p>
+                            <p><localize key="dashbraco_pageViewsLabel">Page Views:</localize> {{ vm.analyticsData.pageViews }}</p>
+                            <p><localize key="dashbraco_sessionsLabel">Sessions:</localize> {{ vm.analyticsData.sessions }}</p>
+                            <p><localize key="dashbraco_bounceRateLabel">Bounce Rate:</localize> {{ vm.analyticsData.bounceRate }}%</p>
+                            <div id="analyticsChart" style="min-height: 365px;"></div>
+                        </div>
                     </div>
                 </umb-box>
             </div>

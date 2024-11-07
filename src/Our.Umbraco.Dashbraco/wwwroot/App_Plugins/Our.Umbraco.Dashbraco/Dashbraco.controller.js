@@ -5,6 +5,7 @@
         vm.analyticsData = {};
         vm.pictureOfTheDay = {};
         vm.unusedMedia = [];
+        vm.haveAnalyticsError = false;
         vm.isProcessingMedia = false;
         vm.totalAmountOfMedia = 0;
         vm.totalUnusedMedia = 0;
@@ -93,17 +94,25 @@
         });
 
         vm.loadAnalyticsData = function () {
-            $http.get('backoffice/api/Dashbraco/GetAnalyticsData').then(function (res) {
-                vm.analyticsData = res.data;
+            $http.get('backoffice/api/Dashbraco/CheckGoogleAnalyticsConfig').then(function (res) {
+                if (res?.data?.item1 == "true") {
+                    $http.get('backoffice/api/Dashbraco/GetAnalyticsData').then(function (res) {
+                        vm.analyticsData = res.data;
 
-                if (vm.analyticsData.bounceRate) {
-                    vm.analyticsData.bounceRate = (parseFloat(vm.analyticsData.bounceRate) * 100).toFixed(2);
+                        if (vm.analyticsData.bounceRate) {
+                            vm.analyticsData.bounceRate = (parseFloat(vm.analyticsData.bounceRate) * 100).toFixed(2);
+                        }
+                    });
+
+                    $http.get('backoffice/api/Dashbraco/GetDailyActiveUsers').then(function (res) {
+                        vm.dailyActiveUsers = res.data;
+                        vm.initChart();
+                    });
                 }
-            });
-
-            $http.get('backoffice/api/Dashbraco/GetDailyActiveUsers').then(function (res) {
-                vm.dailyActiveUsers = res.data;
-                vm.initChart();
+                else {
+                    vm.haveAnalyticsError = true;
+                    vm.analyticsErrorContent = res?.data?.item2 || "An error occurred with the analytics configuration.";
+                }
             });
         };
 

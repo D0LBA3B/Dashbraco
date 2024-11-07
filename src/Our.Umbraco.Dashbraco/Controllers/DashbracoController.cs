@@ -35,6 +35,10 @@ namespace Our.Umbraco.Dashbraco.Controllers
         public DashbracoSettings GetConfig() => _settings;
 
         [HttpGet]
+        public async Task<(bool, string)> CheckGoogleAnalyticsConfig()
+        => await _googleAnalyticsService.CheckConfig();
+
+        [HttpGet]
         public async Task<GAnalyticsModel> GetAnalyticsData()
         => await _googleAnalyticsService.GetMonthlyAnalyticsDataAsync();
 
