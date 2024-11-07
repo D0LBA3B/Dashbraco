@@ -60,6 +60,7 @@
             var defaultWidgets = configRes.data.defaultWidgets;
             vm.showPictureOfTheDay = defaultWidgets.includes("PictureOfTheDay");
             vm.showUnusedMedia = defaultWidgets.includes("UnusedMedia");
+            vm.showEntriesActivites = defaultWidgets.includes("EntriesActivites");
 
             var colors = configRes.data.styles;
             if (colors) {

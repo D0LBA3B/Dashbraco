@@ -14,6 +14,7 @@ namespace Our.Umbraco.Dashbraco
             
             builder.Services.AddScoped<IUnusedMediaService, UnusedMediaService>();            
             builder.Services.AddSingleton<IGoogleAnalyticsService, GoogleAnalyticsService>();            
+            builder.Services.AddSingleton<IEntriesActivitiesService, EntriesActivitiesService>();
             builder.Dashboards().Add<DashbracoDashboard>();
         }
     }
