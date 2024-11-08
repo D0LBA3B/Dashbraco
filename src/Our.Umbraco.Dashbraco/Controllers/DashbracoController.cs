@@ -149,6 +149,7 @@ namespace Our.Umbraco.Dashbraco.Controllers
         => [
             _entriesActivitiesService.GetItemsInRecycleBin(),
             _entriesActivitiesService.GetTotalMembers(),
+            _entriesActivitiesService.GetTotalMediaItems(),
             _entriesActivitiesService.GetTotalElements()
         ];
 

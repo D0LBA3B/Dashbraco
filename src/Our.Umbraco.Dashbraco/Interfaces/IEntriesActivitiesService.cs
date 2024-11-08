@@ -8,6 +8,7 @@ namespace Our.Umbraco.Dashbraco.Interfaces
         public List<LogEntryDto> GetEntries();
         public StatsOverviewModel GetItemsInRecycleBin();
         public StatsOverviewModel GetTotalMembers();
+        public StatsOverviewModel GetTotalMediaItems();
         public StatsOverviewModel GetTotalElements();
     }
 }

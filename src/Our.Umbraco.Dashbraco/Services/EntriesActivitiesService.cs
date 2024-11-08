@@ -1,4 +1,4 @@
-﻿using NPoco;
+using NPoco;
 using Our.Umbraco.Dashbraco.Interfaces;
 using Our.Umbraco.Dashbraco.Models;
 using Our.Umbraco.Dashbraco.Models.Dtos;
@@ -70,7 +70,7 @@ public class EntriesActivitiesService : IEntriesActivitiesService
             return new StatsOverviewModel
             {
                 Count = res,
-                Url = "/umbraco/content/content/recyclebin",
+                Url = "/umbraco#/content/content/recyclebin",
                 Text = "Items in recycle bin"
             };
         }
@@ -89,8 +89,35 @@ public class EntriesActivitiesService : IEntriesActivitiesService
             return new StatsOverviewModel
             {
                 Count = count,
-                Url = "/umbraco/members/members/list/all-members",
+                Url = "/umbraco#/member/member/list/all-members",
                 Text = "Total members"
+            };
+        }
+        catch (Exception)
+        {
+            return new StatsOverviewModel { Count = 0 };
+        }
+    }
+
+    public StatsOverviewModel GetTotalMediaItems()
+    {
+        try
+        {
+            using var scope = _scopeProvider.CreateScope();
+            var count = scope.Database.ExecuteScalar<int>(@"SELECT COUNT(*) FROM (
+                         SELECT ""umbracoNode"".""id"" AS ""Id""
+                         FROM ""umbracoNode""
+                                  INNER JOIN ""umbracoContent""
+                                             ON (""umbracoNode"".""id"" = ""umbracoContent"".""nodeId"")
+                                  INNER JOIN ""umbracoContentVersion""
+                                             ON ((""umbracoNode"".""id"" = ""umbracoContentVersion"".""nodeId"") AND ""umbracoContentVersion"".""current"" = 1)
+                         WHERE (((""umbracoNode"".""nodeObjectType"" = 'B796F64C-1F99-4FFB-B886-4BF4BC011A9C') AND (""umbracoNode"".""trashed"" = 0)))
+                     ) npoco_tbl");
+            return new StatsOverviewModel
+            {
+                Count = count,
+                Url = "/umbraco#/media",
+                Text = "Total media items"
             };
         }
         catch (Exception)
@@ -115,7 +142,7 @@ public class EntriesActivitiesService : IEntriesActivitiesService
             return new StatsOverviewModel
             {
                 Count = res,
-                Url = "/umbraco/content/content/edit/0",
+                Url = String.Empty,
                 Text = "Total elements"
             };
         }
