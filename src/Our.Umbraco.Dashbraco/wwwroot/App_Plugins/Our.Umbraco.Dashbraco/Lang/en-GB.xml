@@ -58,5 +58,7 @@
     <key alias="RolledBack">Rolled back</key>
     <key alias="briefStatistics">Statistics in brief</key>
     <key alias="briefStatisticsDescription">-</key>
+    <key alias="entriesActivities">Entries, Activities & Bullets</key>
+    <key alias="entriesActivitiesDescription">Overview of recent entries, activities, and bullet statistics within the system</key>
   </area>
 </language>
