@@ -90,6 +90,24 @@
             <div ng-show="vm.activeTab === 'entriesActivites'">
                 <div class="dashboard-content">
                     <umb-box>
+                        <umb-box-header title-key="dashbraco_briefStatistics"></umb-box-header>
+                        <umb-box-content>
+                            <div class="statistics-container">
+                                <div ng-repeat="stat in vm.statisticsSummary" class="stat-item">
+                                    <div class="stat-circle">
+                                        <span class="stat-count">{{stat.count}}</span>
+                                    </div>
+                                    <p ng-if="stat.url && stat.url !== ''">
+                                        <a href="{{stat.url}}">
+                                            {{stat.text}}
+                                        </a>
+                                    </p>
+                                    <p ng-if="(stat.url == undefined || stat.url === '')">{{stat.text}}</p>
+                                </div>
+                            </div>
+                        </umb-box-content>
+                    </umb-box>
+                    <umb-box>
                         <umb-box-header title-key="dashbraco_recentActivities" description-key="dashbraco_recentActivitiesDescription"></umb-box-header>
                         <umb-box-content>
                             <div ng-repeat="item in vm.recentActivities.allItems" class="recentActivity">

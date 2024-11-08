@@ -184,6 +184,10 @@
                 });
 
             });
+
+            $http.get('backoffice/api/Dashbraco/GetStatisticsSummary').then(function (res) {
+                vm.statisticsSummary = res.data;
+            });
         };
 
         vm.trustSrc = function (src) {

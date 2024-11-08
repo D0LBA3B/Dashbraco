@@ -1,23 +1,25 @@
 ﻿using NPoco;
 using Our.Umbraco.Dashbraco.Interfaces;
+using Our.Umbraco.Dashbraco.Models;
 using Our.Umbraco.Dashbraco.Models.Dtos;
+using Umbraco.Cms.Core;
 using Umbraco.Cms.Infrastructure.Scoping;
 
-namespace Our.Umbraco.Dashbraco.Services
+namespace Our.Umbraco.Dashbraco.Services;
+
+public class EntriesActivitiesService : IEntriesActivitiesService
 {
-    public class EntriesActivitiesService : IEntriesActivitiesService
+    private readonly IScopeProvider _scopeProvider;
+
+    public EntriesActivitiesService(IScopeProvider scopeProvider) => _scopeProvider = scopeProvider;
+
+    public List<LogEntryDto> GetEntries()
     {
-        private readonly IScopeProvider _scopeProvider;
-
-        public EntriesActivitiesService(IScopeProvider scopeProvider) => _scopeProvider = scopeProvider;
-
-        public List<LogEntryDto> GetEntries()
+        try
         {
-            try
+            using (var scope = _scopeProvider.CreateScope())
             {
-                using (var scope = _scopeProvider.CreateScope())
-                {
-                    var coreSql = @"ul.[id]
+                var coreSql = @"ul.[id]
                               ,ul.[userId]
                               ,ul.[NodeId]
                               ,ul.[entityType]
@@ -43,15 +45,83 @@ namespace Our.Umbraco.Dashbraco.Services
                           ORDER by ul.Datestamp DESC";
 
 
-                    var sql = scope.Database.DatabaseType == DatabaseType.SQLite ? $"SELECT {coreSql} Limit 500" : $"Select Top(500) {coreSql}";
-                    var res = scope.Database.Fetch<LogEntryDto>(sql);
-                    return res;
-                }
+                var sql = scope.Database.DatabaseType == DatabaseType.SQLite
+                    ? $"SELECT {coreSql} Limit 500"
+                    : $"Select Top(500) {coreSql}";
+                var res = scope.Database.Fetch<LogEntryDto>(sql);
+                return res;
             }
-            catch (Exception e)
+        }
+        catch (Exception e)
+        {
+            return new List<LogEntryDto>();
+        }
+    }
+
+    public StatsOverviewModel GetItemsInRecycleBin()
+    {
+        try
+        {
+            using var scope = _scopeProvider.CreateScope();
+            var sql = @"SELECT count(un.[id]) FROM umbracoNode AS un
+                               WHERE un.nodeObjectType = @0 	
+	                           AND un.trashed = 1";
+            var res = scope.Database.ExecuteScalar<int>(sql, Constants.ObjectTypes.Document);
+            return new StatsOverviewModel
             {
-                return new List<LogEntryDto>();
-            }
+                Count = res,
+                Url = "/umbraco/content/content/recyclebin",
+                Text = "Items in recycle bin"
+            };
+        }
+        catch (Exception e)
+        {
+            return new StatsOverviewModel { Count = 0 };
+        }
+    }
+
+    public StatsOverviewModel GetTotalMembers()
+    {
+        try
+        {
+            using var scope = _scopeProvider.CreateScope();
+            var count = scope.Database.ExecuteScalar<int>(@"select COUNT(nodeId) from cmsMember");
+            return new StatsOverviewModel
+            {
+                Count = count,
+                Url = "/umbraco/members/members/list/all-members",
+                Text = "Total members"
+            };
+        }
+        catch (Exception)
+        {
+            return new StatsOverviewModel { Count = 0 };
+        }
+    }
+
+    public StatsOverviewModel GetTotalElements()
+    {
+        try
+        {
+            using var scope = _scopeProvider.CreateScope();
+            var sql = @"SELECT count(un.[id])
+                      FROM umbracoNode AS un
+	                    INNER JOIN umbracoDocument as ud on ud.nodeId = un.id
+                      WHERE 
+	                    un.nodeObjectType = @0
+                        AND un.trashed = 0
+	                    AND ud.published = 1";
+            var res = scope.Database.ExecuteScalar<int>(sql, Constants.ObjectTypes.Document);
+            return new StatsOverviewModel
+            {
+                Count = res,
+                Url = "/umbraco/content/content/edit/0",
+                Text = "Total elements"
+            };
+        }
+        catch (Exception)
+        {
+            return new StatsOverviewModel { Count = 0 };
         }
     }
 }

@@ -56,5 +56,7 @@
     <key alias="SavedAndScheduled">Saved and scheduled</key>
     <key alias="SavedAndPublished">Saved and published</key>
     <key alias="RolledBack">Rolled back</key>
+    <key alias="briefStatistics">Statistics in brief</key>
+    <key alias="briefStatisticsDescription">-</key>
   </area>
 </language>

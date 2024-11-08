@@ -145,6 +145,13 @@ namespace Our.Umbraco.Dashbraco.Controllers
             return model;
         }
 
+        public List<StatsOverviewModel> GetStatisticsSummary()
+        => [
+            _entriesActivitiesService.GetItemsInRecycleBin(),
+            _entriesActivitiesService.GetTotalMembers(),
+            _entriesActivitiesService.GetTotalElements()
+        ];
+
         #endregion
 
         #region Methods

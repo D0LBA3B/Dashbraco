@@ -195,3 +195,36 @@ a {
     .activity-details a:hover {
         color: var(--link-hover-color);
     }
+
+.statistics-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    flex: 1 1 150px;
+    min-width: 120px;
+    margin-right: 15px;
+}
+
+.stat-circle {
+    width: 60px;
+    height: 60px;
+    background-color: var(--secondary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    font-size: 24px;
+    color: var(--text-color);
+    font-weight: bold;
+}
+
+.stat-count {
+    line-height: 1;
+}
