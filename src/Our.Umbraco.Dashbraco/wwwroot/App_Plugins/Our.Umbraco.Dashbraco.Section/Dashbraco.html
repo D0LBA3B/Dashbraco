@@ -1,0 +1,145 @@
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<div ng-controller="Our.Umbraco.Dashbraco.Controller as vm" class="dashbraco">
+    <div class="dashboard-tabs">
+        <ul class="tab-menu">
+            <li ng-class="{ active: vm.activeTab === 'entriesActivites' }" ng-click="vm.setActiveTab('entriesActivites')" ng-if="vm.showEntriesActivites">Activities & system information</li>
+            <li ng-class="{ active: vm.activeTab === 'pictureOfTheDay' }" ng-click="vm.setActiveTab('pictureOfTheDay')" ng-if="vm.showPictureOfTheDay">
+                <localize key="dashbraco_pictureOfTheDayTab">Picture of the Day</localize>
+            </li>
+            <li ng-class="{ active: vm.activeTab === 'unusedMedia' }" ng-click="vm.setActiveTab('unusedMedia')" ng-if="vm.showUnusedMedia">
+                <localize key="dashbraco_unusedMediaTab">Unused Media</localize>
+            </li>
+            <li ng-class="{ active: vm.activeTab === 'analytics' }" ng-click="vm.setActiveTab('analytics')" ng-if="vm.showAnalytics">
+                <localize key="dashbraco_analyticsTab">Analytics</localize>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <div ng-show="vm.activeTab === 'analytics'">
+                <umb-box>
+                    <umb-box-header title-key="dashbraco_overviewTitle" description-key="dashbraco_overviewDescription"></umb-box-header>
+                    <div class="dashboard-content">
+                        <div ng-if="vm.haveAnalyticsError">
+                            <p style="color: red;">{{ vm.analyticsErrorContent }}</p>
+                        </div>
+                        <div ng-if="!vm.haveAnalyticsError">
+                            <p><localize key="dashbraco_visitorsLabel">Visitors:</localize> {{ vm.analyticsData.visitors }}</p>
+                            <p><localize key="dashbraco_pageViewsLabel">Page Views:</localize> {{ vm.analyticsData.pageViews }}</p>
+                            <p><localize key="dashbraco_sessionsLabel">Sessions:</localize> {{ vm.analyticsData.sessions }}</p>
+                            <p><localize key="dashbraco_bounceRateLabel">Bounce Rate:</localize> {{ vm.analyticsData.bounceRate }}%</p>
+                            <div id="analyticsChart" style="min-height: 365px;"></div>
+                        </div>
+                    </div>
+                </umb-box>
+            </div>
+
+            <div ng-show="vm.activeTab === 'pictureOfTheDay'" ng-if="vm.showPictureOfTheDay">
+                <umb-box>
+                    <umb-box-header title="{{vm.pictureOfTheDayTitle}}"></umb-box-header>
+                    <div class="dashboard-content">
+                        <div ng-if="vm.pictureOfTheDay.media_type == 'image'">
+                            <figure>
+                                <figcaption>{{ vm.pictureOfTheDay.explanation }}</figcaption>
+                                <img src="{{ vm.pictureOfTheDay.hdurl }}" alt="{{ vm.pictureOfTheDay.title }}" />
+                            </figure>
+                        </div>
+                        <div ng-if="vm.pictureOfTheDay.media_type == 'video'">
+                            <iframe width="640" height="385" ng-src="{{ vm.trustSrc(vm.pictureOfTheDay.url) }}" frameborder="0"></iframe>
+                        </div>
+                    </div>
+                </umb-box>
+            </div>
+
+            <div ng-show="vm.activeTab === 'unusedMedia'">
+                <umb-box>
+                    <umb-box-header title-key="dashbraco_unusedMediaTitle" description-key="dashbraco_unusedMediaDescription"></umb-box-header>
+                    <div class="dashboard-content">
+                        <button class="btn-refresh" ng-click="vm.startUnusedMediaReport()" ng-disabled="vm.isProcessingMedia">
+                            <localize key="dashbraco_startReportButton">Start Report</localize>
+                        </button>
+                        <div class="stats">
+                            <p><localize key="dashbraco_totalMediaLabel">Total Media:</localize> <strong>{{ vm.totalAmountOfMedia }}</strong></p>
+                            <p><localize key="dashbraco_unusedMediaLabel">Unused Media:</localize> <strong>{{ vm.totalUnusedMedia }}</strong></p>
+                        </div>
+                        <table class="table unused-media-table">
+                            <thead>
+                                <tr>
+                                    <th><localize key="dashbraco_tableHeaderID">ID</localize></th>
+                                    <th><localize key="dashbraco_tableHeaderName">Name</localize></th>
+                                    <th><localize key="dashbraco_tableHeaderType">Type</localize></th>
+                                    <th><localize key="dashbraco_tableHeaderActions">Actions</localize></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="media in vm.unusedMedia">
+                                    <td>{{ media.id }}</td>
+                                    <td>{{ media.name }}</td>
+                                    <td>{{ media.type }}</td>
+                                    <td>
+                                        <button class="btn-action" ng-click="vm.moveItemToRecycling(media.id)">
+                                            <localize key="dashbraco_moveToRecyclingButton">Move to Recycling</localize>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </umb-box>
+            </div>
+
+            <div ng-show="vm.activeTab === 'entriesActivites'">
+                <div class="dashboard-content">
+                    <umb-box>
+                        <umb-box-header title-key="dashbraco_entriesActivities" description-key="dashbraco_entriesActivitiesDescription"></umb-box-header>
+                        <umb-box-content>
+                            <div class="statistics-container">
+                                <div ng-repeat="stat in vm.statisticsSummary" class="stat-item">
+                                    <div class="stat-circle">
+                                        <span class="stat-count">{{stat.count}}</span>
+                                    </div>
+                                    <p ng-if="stat.url && stat.url !== ''">
+                                        <a href="{{stat.url}}">
+                                            {{stat.text}}
+                                        </a>
+                                    </p>
+                                    <p ng-if="(stat.url == undefined || stat.url === '')">{{stat.text}}</p>
+                                </div>
+                            </div>
+                            <div ng-repeat="item in vm.recentActivities.allItems" class="recentActivity">
+                                <div class="activity-item">
+                                    <umb-avatar name="{{item.user.name}}"
+                                                size="xs"
+                                                color="secondary"
+                                                img-src="{{item.user.avatar[0]}}"
+                                                img-srcset="{{item.user.avatar[1]}} 2x, {{item.user.avatar[2]}} 3x">
+                                    </umb-avatar>
+                                    <div class="activity-details">
+                                        <span class="dashbraco-datetime">{{item.datestampFormatted}}</span>
+                                        <p ng-if="item.activityType =='Save'">
+                                            <strong>{{item.user.name}}</strong> <localize key="dashbraco_saved">saved</localize> <a href="/umbraco/#/content/content/edit/{{item.nodeId}}">{{item.nodeName}}</a> <localize key="dashbraco_butDidNotPublish">but did not publish</localize>.
+                                        </p>
+                                        <p ng-if="item.activityType =='SaveAndScheduled'">
+                                            <strong>{{item.user.name}}</strong> <localize key="dashbraco_savedAndScheduled">saved and scheduled</localize> <a href="/umbraco/#/content/content/edit/{{item.nodeId}}">{{item.nodeName}}</a> <localize key="dashbraco_forPublishingAt">for publishing at</localize> {{item.scheduledPublishDateFormatted}}.
+                                        </p>
+                                        <p ng-if="item.activityType =='Publish'">
+                                            <strong>{{item.user.name}}</strong> <localize key="dashbraco_savedAndPublished">saved and published</localize> <a href="/umbraco/#/content/content/edit/{{item.nodeId}}">{{item.nodeName}}</a>.
+                                        </p>
+                                        <p ng-if="item.activityType =='Unpublish'">
+                                            <strong>{{item.user.name}}</strong> <localize key="dashbraco_unpublished">unpublished</localize> <a href="/umbraco/#/content/content/edit/{{item.nodeId}}">{{item.nodeName}}</a>.
+                                        </p>
+                                        <p ng-if="item.activityType =='RecycleBin'">
+                                            <strong>{{item.user.name}}</strong> <localize key="dashbraco_moved">moved</localize> <a href="/umbraco/#/content/content/edit/{{item.nodeId}}">{{item.nodeName}}</a> <localize key="dashbraco_to">to</localize> <a href="/umbraco/#/content/content/recyclebin"><localize key="dashbraco_recycleBin">recycle bin</localize></a>.
+                                        </p>
+                                        <p ng-if="item.activityType =='RollBack'">
+                                            <strong>{{item.user.name}}</strong> <localize key="dashbraco_rolledBack">rolled back</localize> <a href="/umbraco/#/content/content/edit/{{item.nodeId}}">{{item.nodeName}}</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </umb-box-content>
+                    </umb-box>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

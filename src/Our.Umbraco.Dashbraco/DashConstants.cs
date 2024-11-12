@@ -4,6 +4,15 @@ namespace Our.Umbraco.Dashbraco
 {
 	public static class DashConstants
 	{
+		public static class DashbracoDefs
+        {
+            public const string Dashbraco = "Dashbraco";
+            public const string DashbracoSection = "Our.Dashbraco.Section";
+            public const string DashbracoDashboard = "Our.Dashbraco.Dashboard";
+            public const string DashbracoSectionAlias = "OurUmbracoDashbracoSection";
+            public const string DashbracoDasboardAlias = "OurUmbracoDashbraco";
+        }
+
 		public static class ActivityTypes
 		{
 			public const string Publish = "Publish";

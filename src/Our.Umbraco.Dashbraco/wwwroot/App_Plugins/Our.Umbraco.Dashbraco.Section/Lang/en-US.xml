@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<language>
+  <area alias="sections">
+    <key alias="OurUmbracoDashbracoSection">Dashbraco ❤</key>
+  </area>
+  <area alias="dashboardTabs">
+    <key alias="pictureOfTheDayTab">Picture of the Day</key>
+    <key alias="unusedMediaTab">Unused Media</key>
+    <key alias="analyticsTab">Analytics</key>
+  </area>
+  <area alias="dashbraco">
+    <key alias="overviewTitle">Overview</key>
+    <key alias="overviewDescription">Real-time statistics</key>
+    <key alias="pagePerformanceTitle">Page Performance</key>
+    <key alias="pagePerformanceDescription">Loading time and user interactions</key>
+    <key alias="trafficSourcesTitle">Traffic Sources</key>
+    <key alias="trafficSourcesDescription">Visitor origins and interactions</key>
+    <key alias="visitorsLabel">Visitors:</key>
+    <key alias="pageViewsLabel">Page Views:</key>
+    <key alias="avgSessionDurationLabel">Average Session Duration:</key>
+    <key alias="unusedMediaTitle">Unused Media</key>
+    <key alias="unusedMediaDescription">List of unused media items</key>
+    <key alias="startReportButton">Start Report</key>
+    <key alias="totalMediaLabel">Total Media:</key>
+    <key alias="unusedMediaLabel">Unused Media:</key>
+    <key alias="tableHeaderID">ID</key>
+    <key alias="tableHeaderName">Name</key>
+    <key alias="tableHeaderType">Type</key>
+    <key alias="tableHeaderActions">Actions</key>
+    <key alias="moveToRecyclingButton">Move to Recycling</key>
+    <key alias="recentActivities">Recent activities</key>
+    <key alias="recentActivitiesDescription">Shows recent activities from all users in the back office.</key>
+    <key alias="unpublishedContent">Unpublished content</key>
+    <key alias="unpublishedContentDescription">Shows unpublished content that has not been scheduled for publish.</key>
+    <key alias="pendingContent">Pending content</key>
+    <key alias="pendingContentDescription">Shows published content with changes that have not been scheduled for publishing.</key>
+    <key alias="yourRecentActivity">Your recent activity</key>
+    <key alias="yourRecentActivitiesDescription">Shows your own recent activities</key>
+    <key alias="publishedContentNodes">Published content nodes</key>
+    <key alias="nodesInRecycleBin">Nodes in recycle bin</key>
+    <key alias="membersOnWebsite">Members on website</key>
+    <key alias="newMembersLastWeek">New members last week</key>
+    <key alias="butNotPublishedOrScheduled">but not published or scheduled</key>
+    <key alias="butDidNotPublish">but did not publish</key>
+    <key alias="forPublishingAt">for publishing at</key>
+    <key alias="to">to</key>
+    <key alias="saved">saved</key>
+    <key alias="moved">moved</key>
+    <key alias="unpublished">unpublished</key>
+    <key alias="savedBy">saved by</key>
+    <key alias="savedAndScheduled">saved and scheduled</key>
+    <key alias="savedAndPublished">saved and published</key>
+    <key alias="recycleBin">recycle bin</key>
+    <key alias="rolledBack">rolled back</key>
+    <key alias="Saved">Saved</key>
+    <key alias="Moved">Moved</key>
+    <key alias="Unpublished">Unpublished</key>
+    <key alias="SavedAndScheduled">Saved and scheduled</key>
+    <key alias="SavedAndPublished">Saved and published</key>
+    <key alias="RolledBack">Rolled back</key>
+    <key alias="briefStatistics">Statistics in brief</key>
+    <key alias="briefStatisticsDescription">-</key>
+    <key alias="entriesActivities">Entries, Activities and Bullets</key>
+    <key alias="entriesActivitiesDescription">Overview of recent entries, activities, and bullet statistics within the system</key>
+  </area>
+</language>

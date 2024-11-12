@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Our.Umbraco.Dashbraco.Interfaces;
 using Our.Umbraco.Dashbraco.Services;
 using Umbraco.Cms.Core.Composing;
@@ -11,11 +12,25 @@ namespace Our.Umbraco.Dashbraco
         public void Compose(IUmbracoBuilder builder)
         {
             builder.Services.Configure<DashbracoSettings>(builder.Config.GetSection("Dashbraco"));
-            
-            builder.Services.AddScoped<IUnusedMediaService, UnusedMediaService>();            
-            builder.Services.AddSingleton<IGoogleAnalyticsService, GoogleAnalyticsService>();            
+
+            builder.Services.AddScoped<IUnusedMediaService, UnusedMediaService>();
+            builder.Services.AddSingleton<IGoogleAnalyticsService, GoogleAnalyticsService>();
             builder.Services.AddSingleton<IEntriesActivitiesService, EntriesActivitiesService>();
-            builder.Dashboards().Add<DashbracoDashboard>();
+
+            var dashbracoSettings = builder.Config.GetSection("Dashbraco").Get<DashbracoSettings>();
+            Console.WriteLine(dashbracoSettings.DisplayAsDashboard);
+            if (dashbracoSettings != null && !dashbracoSettings.DisplayAsDashboard)
+            {
+                builder.Sections().Append<DashbracoSection>();
+                builder.Components().Append<UserGroupComponent>();
+                builder.Dashboards().Remove<DashbracoDashboard>();
+            }
+            else
+            {
+                builder.Dashboards().Add<DashbracoDashboard>();
+                builder.Sections().Remove<DashbracoSection>();
+            }
         }
+
     }
 }

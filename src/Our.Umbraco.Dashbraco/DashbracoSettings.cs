@@ -3,6 +3,7 @@
     public class DashbracoSettings
     {
         public string[] DefaultWidgets { get; set; } = ["Analytics", "PictureOfTheDay", "UnusedMedia"];
+        public bool DisplayAsDashboard { get; set; } = true;
         public int RefreshInterval { get; set; } = 300;
         public string GoogleAnalyticsPropertyId { get; set; } = String.Empty;
         public DashColors Styles { get; set; } = new DashColors();

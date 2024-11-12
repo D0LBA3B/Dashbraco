@@ -1,0 +1,230 @@
+﻿:root {
+    --primary-color: #f8f9fa;
+    --secondary-color: #e9ecef;
+    --text-color: #495057;
+    --active-tab-color: #007bff;
+    --inactive-tab-color: #e9ecef;
+    --background-color: #f8f9fa;
+    --border-color: #ddd;
+    --hover-color: #d1e7ff;
+    --button-color: #007bff;
+    --button-text-color: #fff;
+    --success-color: #28a745;
+    --warning-color: #ffc107;
+    --error-color: #dc3545;
+    --link-color: #007bff;
+    --link-hover-color: #0056b3;
+}
+
+.dashbraco {
+    padding: 20px;
+    background-color: var(--background-color);
+}
+
+.dashboard-tabs .tab-menu {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+    .dashboard-tabs .tab-menu li {
+        padding: 10px 20px;
+        cursor: pointer;
+        background-color: var(--inactive-tab-color);
+        margin-right: 10px;
+        border-radius: 5px 5px 0 0;
+        transition: background-color 0.3s ease;
+        color: var(--text-color);
+    }
+
+        .dashboard-tabs .tab-menu li.active {
+            background-color: var(--active-tab-color);
+            color: var(--button-text-color);
+            border: 1px solid var(--active-tab-color);
+            border-bottom: none;
+            font-weight: bold;
+        }
+
+        .dashboard-tabs .tab-menu li:hover {
+            background-color: var(--hover-color);
+        }
+
+.tab-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+    .tab-content umb-box {
+        width: 100%;
+        background: var(--background-color);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+        .tab-content umb-box .dashboard-content {
+            padding: 20px;
+            font-size: 14px;
+            color: var(--text-color);
+        }
+
+.dashboard-content {
+    padding: 30px;
+}
+
+.btn-refresh {
+    background-color: var(--button-color);
+    color: var(--button-text-color);
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
+    .btn-refresh:disabled {
+        background-color: var(--border-color);
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+
+    .btn-refresh:active {
+        background-color: var(--link-hover-color);
+    }
+
+    .btn-refresh.loading::after {
+        content: " (Processing...)";
+        font-style: italic;
+    }
+
+.stats {
+    margin: 10px 0;
+    font-size: 15px;
+    color: var(--text-color);
+}
+
+.table.unused-media-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+    .table.unused-media-table th,
+    .table.unused-media-table td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .table.unused-media-table th {
+        background-color: var(--secondary-color);
+        font-weight: bold;
+        color: var(--text-color);
+    }
+
+    .table.unused-media-table tr:hover {
+        background-color: var(--hover-color);
+    }
+
+.btn-action {
+    background-color: var(--error-color);
+    color: var(--button-text-color);
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    .btn-action:hover {
+        background-color: #c82333;
+    }
+
+a {
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+    a:hover {
+        color: var(--link-hover-color);
+    }
+
+.recentActivity {
+    padding: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.activity-item {
+    display: flex;
+    align-items: flex-start;
+}
+
+.umb-avatar {
+    margin-right: 15px;
+}
+
+.activity-details {
+    flex: 1;
+}
+
+.dashbraco-datetime {
+    font-size: 12px;
+    color: var(--text-color);
+    margin-bottom: 5px;
+    display: block;
+}
+
+.activity-details p {
+    margin: 5px 0;
+    color: var(--text-color);
+}
+
+    .activity-details p strong {
+        color: var(--text-color);
+    }
+
+.activity-details a {
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+    .activity-details a:hover {
+        color: var(--link-hover-color);
+    }
+
+.statistics-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    flex: 1 1 150px;
+    min-width: 120px;
+    margin-right: 15px;
+}
+
+.stat-circle {
+    width: 60px;
+    height: 60px;
+    background-color: var(--secondary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    font-size: 24px;
+    color: var(--text-color);
+    font-weight: bold;
+}
+
+.stat-count {
+    line-height: 1;
+}

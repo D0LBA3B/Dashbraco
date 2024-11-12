@@ -6,7 +6,7 @@ namespace Our.Umbraco.Dashbraco
     [Weight(-10000)]
     public class DashbracoDashboard : IDashboard
     {
-        public string Alias => "Our.Umbraco.Dashbraco";
+        public string Alias => DashConstants.DashbracoDefs.DashbracoDashboard;
         public string View => "/App_Plugins/Our.Umbraco.Dashbraco/Dashbraco.html";
 
         public string[] Sections => new[]
