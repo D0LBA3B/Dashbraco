@@ -29,6 +29,7 @@
 - **Advanced Google Analytics Integration**: Gain detailed user behavior insights and traffic sources through customized Google Analytics reports.
 
 ## Installation
+[![NuGet version (Our.Umbraco.Dashbraco)](https://img.shields.io/nuget/v/Our.Umbraco.Dashbraco.svg?style=flat-square)](https://www.nuget.org/packages/Our.Umbraco.Dashbraco/)
 
 You can install Dashbraco via [NuGet](https://www.nuget.org/packages/Our.Umbraco.Dashbraco/):
 
@@ -98,6 +99,7 @@ Dashbraco supports configuration settings in `appsettings.json`:
 Contributions are welcome! Feel free to open issues or submit pull requests to enhance Dashbraco’s functionality.
 
 ## License
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 This project is licensed under the [GNU General Public License v3.0](LICENSE).
 
