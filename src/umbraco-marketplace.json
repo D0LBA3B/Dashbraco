@@ -1,0 +1,37 @@
+{
+  "$schema": "https://marketplace.umbraco.com/umbraco-marketplace-schema.json",
+  "AuthorDetails": {
+    "Name": "Dolba",
+    "Description": "A web developer who became passionate about Umbraco",
+    "Url": "https://github.com/D0LBA3B",
+    "ImageUrl": "https://avatars.githubusercontent.com/u/99276828"
+  },
+  "Title": "Dashbraco",
+  "Description": "Dashbraco is a customizable dashboard for Umbraco, providing analytics stats, Umbraco stats, and tools to view unused media, among other features. It is fully customizable and organized into tabs for better usability.",
+  "DocumentationUrl": "https://github.com/D0LBA3B/Dashbraco",
+  "IssueTrackerUrl": "https://github.com/D0LBA3B/Dashbraco/issues",
+  "Category": "Editor Tools",
+  "LicenseTypes": ["Free"],
+  "PackageType": "Package",
+  "Tags": [
+    "dashboard",
+    "analytics",
+    "umbraco",
+    "editor"
+  ],
+  "Screenshots": [
+    {
+      "ImageUrl": "https://raw.githubusercontent.com/D0LBA3B/Dashbraco/master/screens/dashbraco-ustats.png",
+      "Caption": "Main view of the Dashbraco dashboard"
+    },
+    {
+      "ImageUrl": "https://raw.githubusercontent.com/D0LBA3B/Dashbraco/master/screens/dashbraco-media.png",
+      "Caption": "Unused media"
+    },
+    {
+      "ImageUrl": "https://raw.githubusercontent.com/D0LBA3B/Dashbraco/master/screens/dashbraco-analytics.png",
+      "Caption": "Example of statistics"
+    }
+  ],
+  "LookingForContributors": true
+}

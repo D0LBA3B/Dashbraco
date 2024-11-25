@@ -13,7 +13,7 @@
     <Product>Dashbraco - Dashboard for Umbraco</Product>
     <Title>Our.Umbraco.Dashbraco</Title>
     <Description>Dashbraco: An Umbraco dashboard package delivering real-time analytics, media management, and customizable widgets to enhance content and user insights.</Description>
-    <PackageTags>umbraco plugin package analytics dashboard</PackageTags>
+    <PackageTags>umbraco plugin umbraco-marketplace package analytics dashboard</PackageTags>
     <Authors>D0LBA3B</Authors>
     <Company>D0LBA3B</Company>
     <PackageProjectUrl>https://github.com/D0LBA3B/Dashbraco</PackageProjectUrl>
