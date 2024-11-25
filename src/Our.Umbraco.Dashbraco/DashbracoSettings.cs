@@ -1,8 +1,9 @@
-﻿namespace Our.Umbraco.Dashbraco
+namespace Our.Umbraco.Dashbraco
 {
     public class DashbracoSettings
     {
         public string[] DefaultWidgets { get; set; } = ["Analytics", "PictureOfTheDay", "UnusedMedia"];
+        public string LayoutStyle { get; set; } = "tabs";
         public int RefreshInterval { get; set; } = 300;
         public string GoogleAnalyticsPropertyId { get; set; } = String.Empty;
         public DashColors Styles { get; set; } = new DashColors();

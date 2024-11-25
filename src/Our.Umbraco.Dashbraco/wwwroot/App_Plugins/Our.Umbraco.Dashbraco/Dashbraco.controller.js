@@ -86,6 +86,7 @@
             vm.showUnusedMedia = defaultWidgets.includes("UnusedMedia");
             vm.showAnalytics = defaultWidgets.includes("Analytics");
             vm.showEntriesActivites = defaultWidgets.includes("EntriesActivites");
+            vm.layoutStyle = configRes.data.layoutStyle || 'tabs';
 
             if (vm.showEntriesActivites) {
                 vm.loadRecentActivities();

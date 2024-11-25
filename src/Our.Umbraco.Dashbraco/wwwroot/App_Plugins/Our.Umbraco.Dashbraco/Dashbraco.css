@@ -75,6 +75,71 @@
     padding: 30px;
 }
 
+.gluedtabs-menu {
+    display: flex;
+    justify-content: flex-start;
+    background-color: var(--secondary-color);
+    padding: 0;
+    list-style: none;
+}
+
+    .gluedtabs-menu li {
+        padding: 10px 15px;
+        cursor: pointer;
+        color: var(--text-color);
+        border-bottom: 1px solid var(--border-color);
+    }
+
+        .gluedtabs-menu li.active {
+            background-color: var(--active-tab-color);
+            color: var(--button-text-color);
+        }
+
+.gluedtabs-content {
+    padding: 20px;
+    flex: 1;
+    background-color: var(--background-color);
+}
+
+.dashboard-sidebar {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    background-color: var(--secondary-color);
+    border-right: 1px solid var(--border-color);
+    padding: 0;
+    list-style: none;
+}
+
+    .sidebar-menu li {
+        padding: 10px 15px;
+        cursor: pointer;
+        color: var(--text-color);
+        border-bottom: 1px solid var(--border-color);
+    }
+
+        .sidebar-menu li:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar-menu li.active {
+            background-color: var(--active-tab-color);
+            color: var(--button-text-color);
+            font-weight: bold;
+        }
+
+.sidebar-content {
+    flex: 1;
+    padding: 20px;
+    background-color: var(--background-color);
+    overflow: auto;
+}
+
 .btn-refresh {
     background-color: var(--button-color);
     color: var(--button-text-color);

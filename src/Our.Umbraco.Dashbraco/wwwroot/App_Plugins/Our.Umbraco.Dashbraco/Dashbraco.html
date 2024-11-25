@@ -1,8 +1,16 @@
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <div ng-controller="Our.Umbraco.Dashbraco.Controller as vm" class="dashbraco">
-    <div class="dashboard-tabs">
-        <ul class="tab-menu">
-            <li ng-class="{ active: vm.activeTab === 'entriesActivites' }" ng-click="vm.setActiveTab('entriesActivites')" ng-if="vm.showEntriesActivites">Activities & system information</li>
+    <div ng-class="{'dashboard-sidebar': vm.layoutStyle === 'sidebar', 'dashboard-tabs': vm.layoutStyle === 'tabs', 'dashboard-gluedtabs': vm.layoutStyle === 'glued-tabs'}" class="dashboard-container">
+
+        <ul ng-class="{
+            'sidebar-menu': vm.layoutStyle === 'sidebar',
+            'tab-menu': vm.layoutStyle === 'tabs',
+            'gluedtabs-menu': vm.layoutStyle === 'glued-tabs'
+        }">
+            <li ng-class="{ active: vm.activeTab === 'entriesActivites' }" ng-click="vm.setActiveTab('entriesActivites')" ng-if="vm.showEntriesActivites">
+                <span ng-if="vm.layoutStyle !== 'sidebar'">Activities & system information</span>
+                <span ng-if="vm.layoutStyle === 'sidebar'">Activities</span>
+            </li>
             <li ng-class="{ active: vm.activeTab === 'pictureOfTheDay' }" ng-click="vm.setActiveTab('pictureOfTheDay')" ng-if="vm.showPictureOfTheDay">
                 <localize key="dashbraco_pictureOfTheDayTab">Picture of the Day</localize>
             </li>
@@ -14,7 +22,7 @@
             </li>
         </ul>
 
-        <div class="tab-content">
+        <div ng-class="{'sidebar-content': vm.layoutStyle === 'sidebar', 'tab-content': vm.layoutStyle !== 'sidebar'}">
             <div ng-show="vm.activeTab === 'analytics'">
                 <umb-box>
                     <umb-box-header title-key="dashbraco_overviewTitle" description-key="dashbraco_overviewDescription"></umb-box-header>
@@ -33,14 +41,18 @@
                 </umb-box>
             </div>
 
-            <div ng-show="vm.activeTab === 'pictureOfTheDay'" ng-if="vm.showPictureOfTheDay">
+            <div ng-show="vm.activeTab === 'pictureOfTheDay'">
                 <umb-box>
-                    <umb-box-header title="{{vm.pictureOfTheDayTitle}}"></umb-box-header>
-                    <div class="dashboard-content">
+                <div class="umb-box-header ng-scope ng-isolate-scope" title-key="dashbraco_unusedMediaTitle" description-key="dashbraco_unusedMediaDescription">
+                    <div>
+                        <div class="umb-box-header-title ng-binding ng-scope"> {{vm.pictureOfTheDayTitle}} </div>
+                    </div>
+                </div>
+                <div class="dashboard-content">
                         <div ng-if="vm.pictureOfTheDay.media_type == 'image'">
                             <figure>
                                 <figcaption>{{ vm.pictureOfTheDay.explanation }}</figcaption>
-                                <img src="{{ vm.pictureOfTheDay.hdurl }}" alt="{{ vm.pictureOfTheDay.title }}" />
+                                <br/><img src="{{ vm.pictureOfTheDay.hdurl }}" alt="{{ vm.pictureOfTheDay.title }}"/>
                             </figure>
                         </div>
                         <div ng-if="vm.pictureOfTheDay.media_type == 'video'">
@@ -88,57 +100,33 @@
             </div>
 
             <div ng-show="vm.activeTab === 'entriesActivites'">
-                <div class="dashboard-content">
-                    <umb-box>
-                        <umb-box-header title-key="dashbraco_entriesActivities" description-key="dashbraco_entriesActivitiesDescription"></umb-box-header>
-                        <umb-box-content>
-                            <div class="statistics-container">
-                                <div ng-repeat="stat in vm.statisticsSummary" class="stat-item">
-                                    <div class="stat-circle">
-                                        <span class="stat-count">{{stat.count}}</span>
-                                    </div>
-                                    <p ng-if="stat.url && stat.url !== ''">
-                                        <a href="{{stat.url}}">
-                                            {{stat.text}}
-                                        </a>
+                <umb-box>
+                    <umb-box-header title-key="dashbraco_entriesActivities" description-key="dashbraco_entriesActivitiesDescription"></umb-box-header>
+                    <umb-box-content>
+                        <div class="statistics-container">
+                            <div ng-repeat="stat in vm.statisticsSummary" class="stat-item">
+                                <div class="stat-circle">
+                                    <span class="stat-count">{{stat.count}}</span>
+                                </div>
+                                <p ng-if="stat.url">
+                                    <a href="{{stat.url}}">{{stat.text}}</a>
+                                </p>
+                                <p ng-if="!stat.url">{{stat.text}}</p>
+                            </div>
+                        </div>
+                        <div ng-repeat="item in vm.recentActivities.allItems" class="recentActivity">
+                            <div class="activity-item">
+                                <umb-avatar name="{{item.user.name}}" size="xs" img-src="{{item.user.avatar[0]}}"></umb-avatar>
+                                <div class="activity-details">
+                                    <span class="dashbraco-datetime">{{item.datestampFormatted}}</span>
+                                    <p ng-if="item.activityType == 'Save'">
+                                        <strong>{{item.user.name}}</strong> saved {{item.nodeName}} but did not publish.
                                     </p>
-                                    <p ng-if="(stat.url == undefined || stat.url === '')">{{stat.text}}</p>
                                 </div>
                             </div>
-                            <div ng-repeat="item in vm.recentActivities.allItems" class="recentActivity">
-                                <div class="activity-item">
-                                    <umb-avatar name="{{item.user.name}}"
-                                                size="xs"
-                                                color="secondary"
-                                                img-src="{{item.user.avatar[0]}}"
-                                                img-srcset="{{item.user.avatar[1]}} 2x, {{item.user.avatar[2]}} 3x">
-                                    </umb-avatar>
-                                    <div class="activity-details">
-                                        <span class="dashbraco-datetime">{{item.datestampFormatted}}</span>
-                                        <p ng-if="item.activityType =='Save'">
-                                            <strong>{{item.user.name}}</strong> <localize key="dashbraco_saved">saved</localize> <a href="/umbraco/#/content/content/edit/{{item.nodeId}}">{{item.nodeName}}</a> <localize key="dashbraco_butDidNotPublish">but did not publish</localize>.
-                                        </p>
-                                        <p ng-if="item.activityType =='SaveAndScheduled'">
-                                            <strong>{{item.user.name}}</strong> <localize key="dashbraco_savedAndScheduled">saved and scheduled</localize> <a href="/umbraco/#/content/content/edit/{{item.nodeId}}">{{item.nodeName}}</a> <localize key="dashbraco_forPublishingAt">for publishing at</localize> {{item.scheduledPublishDateFormatted}}.
-                                        </p>
-                                        <p ng-if="item.activityType =='Publish'">
-                                            <strong>{{item.user.name}}</strong> <localize key="dashbraco_savedAndPublished">saved and published</localize> <a href="/umbraco/#/content/content/edit/{{item.nodeId}}">{{item.nodeName}}</a>.
-                                        </p>
-                                        <p ng-if="item.activityType =='Unpublish'">
-                                            <strong>{{item.user.name}}</strong> <localize key="dashbraco_unpublished">unpublished</localize> <a href="/umbraco/#/content/content/edit/{{item.nodeId}}">{{item.nodeName}}</a>.
-                                        </p>
-                                        <p ng-if="item.activityType =='RecycleBin'">
-                                            <strong>{{item.user.name}}</strong> <localize key="dashbraco_moved">moved</localize> <a href="/umbraco/#/content/content/edit/{{item.nodeId}}">{{item.nodeName}}</a> <localize key="dashbraco_to">to</localize> <a href="/umbraco/#/content/content/recyclebin"><localize key="dashbraco_recycleBin">recycle bin</localize></a>.
-                                        </p>
-                                        <p ng-if="item.activityType =='RollBack'">
-                                            <strong>{{item.user.name}}</strong> <localize key="dashbraco_rolledBack">rolled back</localize> <a href="/umbraco/#/content/content/edit/{{item.nodeId}}">{{item.nodeName}}</a>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </umb-box-content>
-                    </umb-box>
-                </div>
+                        </div>
+                    </umb-box-content>
+                </umb-box>
             </div>
         </div>
     </div>

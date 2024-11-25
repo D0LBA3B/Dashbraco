@@ -1,4 +1,3 @@
-
 # Dashbraco
 
 **Dashbraco** is a comprehensive dashboard package for Umbraco, designed to provide site administrators with in-depth analytics and insights directly within the CMS. This project is actively developed to bring powerful features for optimizing content and enhancing user engagement.
@@ -29,15 +28,14 @@
 - **Advanced Google Analytics Integration**: Gain detailed user behavior insights and traffic sources through customized Google Analytics reports.
 
 ## Installation
-[![NuGet version (Our.Umbraco.Dashbraco)](https://img.shields.io/nuget/v/Our.Umbraco.Dashbraco.svg?style=flat-square)](https://www.nuget.org/packages/Our.Umbraco.Dashbraco/)
+[![NuGet version (Our.Umbraco.Dashbraco)](https://img.shields.io/nuget/v/Our.Umbraco.Dashbraco.svg)](https://www.nuget.org/packages/Our.Umbraco.Dashbraco/) [![Umbraco Marketplace (Our.Umbraco.Dashbraco)](https://img.shields.io/badge/Umbraco%20Marketplace-Dashbraco-green)](https://marketplace.umbraco.com/package/our.umbraco.dashbraco/)
+
 
 You can install Dashbraco via [NuGet](https://www.nuget.org/packages/Our.Umbraco.Dashbraco/):
 
 ```bash
 dotnet add package Our.Umbraco.Dashbraco
 ```
-
-
 
 ## Demo
 _All colors are editable & tabs can be disabled/enabled via appsettings (my choice of color is disgusting I guess ahaha)_
@@ -59,6 +57,7 @@ Dashbraco supports configuration settings in `appsettings.json`:
 ```json
   "Dashbraco": {
     "DefaultWidgets": [ "Analytics", "PictureOfTheDay", "UnusedMedia", "EntriesActivites" ],
+    "LayoutStyle": "sidebar", // 'tabs', 'glued-tabs' or 'sidebar'
     "RefreshInterval": 300,
     "GoogleAnalyticsPropertyId": "99999999",
     "GoogleCredentials": {
