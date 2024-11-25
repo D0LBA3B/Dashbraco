@@ -42,13 +42,13 @@ dotnet add package Our.Umbraco.Dashbraco
 ## Demo
 _All colors are editable & tabs can be disabled/enabled via appsettings (my choice of color is disgusting I guess ahaha)_
 
-![image](screens/dashbraco-analytics.png)
+![image](https://raw.githubusercontent.com/D0LBA3B/Dashbraco/master/screens/dashbraco-analytics.png)
 
 
-![image](screens/dashbraco-ustats.png)
+![image](https://raw.githubusercontent.com/D0LBA3B/Dashbraco/master/screens/dashbraco-ustats.png)
 
 
-![image](screens/dashbraco-media.png)
+![image](https://raw.githubusercontent.com/D0LBA3B/Dashbraco/master/screens/dashbraco-media.png)
 
 
 

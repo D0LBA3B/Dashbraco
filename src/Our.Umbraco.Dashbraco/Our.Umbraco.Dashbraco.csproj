@@ -9,7 +9,7 @@
 
   <PropertyGroup>
     <PackageId>Our.Umbraco.Dashbraco</PackageId>
-    <Version>0.0.4</Version>
+    <Version>0.0.6</Version>
     <Product>Dashbraco - Dashboard for Umbraco</Product>
     <Title>Our.Umbraco.Dashbraco</Title>
     <Description>Dashbraco: An Umbraco dashboard package delivering real-time analytics, media management, and customizable widgets to enhance content and user insights.</Description>
@@ -41,6 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\dashbraco.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\umbraco-marketplace.json">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
